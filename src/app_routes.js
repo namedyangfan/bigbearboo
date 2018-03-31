@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import  Home  from './pages/home'
 import Contact from './pages/contact'
 import About from './pages/about'
+import Loginpage from './pages/login_page'
 
 const App_routes = () => (
   <main>
@@ -10,6 +11,7 @@ const App_routes = () => (
       <Route exact path='/' component={Home}/>
       <Route path="/about" component={About}/>
       <Route path="/contact" component={Contact}/>
+      <Route path="/login" component={Loginpage}/>
     </Switch>
   </main>
 )

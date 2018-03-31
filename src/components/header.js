@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 var classNames = require('classnames');
 
 
-class Header extends Component {
+export default class Header extends Component {
 
   constructor(props) {
     super();
@@ -27,15 +27,19 @@ class Header extends Component {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="#">Navbar</a>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav">
+          <ul className="navbar-nav mr-auto">
             <NavLink exact className="nav-item nav-link" to="/" activeClassName="active">Home</NavLink>
             <NavLink className="nav-item nav-link" to="/about" activeClassName="active">About</NavLink>
             <NavLink className="nav-item nav-link" to="/contact" activeClassName="active">Contact</NavLink>
-          </div>
+          </ul>
+          <ul className="nav navbar-nav navbar-right">
+            <a class="btn btn-primary" href="#" role="button">
+              <i className="material-icons left">shopping_cart</i> {this.props.numShopItem}
+            </a>
+            <NavLink className="nav-item nav-link" to="/login" activeClassName="active">login</NavLink>
+          </ul>
         </div>
       </nav>
       );
   }
 }
-
-export default Header;
