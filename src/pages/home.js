@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '.././components/header'
 import ShopItem from '.././components/home/shop_item'
+import Footer from '.././components/footer'
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -22,6 +23,7 @@ export default class Home extends React.Component {
       <div>
         <Header numShopItem={this.state.numShopItem}/>
         <ShopItem handleClick={this.handleAddShopItem}/>
+        <Footer />
       </div>
       );
   }

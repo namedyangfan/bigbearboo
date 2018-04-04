@@ -1,7 +1,6 @@
 import React from 'react';
 import App_routes from "./app_routes"
-import { Switch, Route } from 'react-router-dom'
-import { BrowserRouter } from 'react-router-dom'
+import {BrowserRouter, Switch, Route, Link} from 'react-router-dom'
 
 const App = () => (
   <BrowserRouter>
