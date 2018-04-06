@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import Header from '.././components/header'
 var classNames = require('classnames');
 
-export default class Loginpage extends Component {
+export default class LoginPage extends Component {
 
   renderUserAccountInput = () => {
     return(
@@ -56,7 +56,7 @@ export default class Loginpage extends Component {
     return(
       <div className="input-field col s6">
         <p className="margin">
-          <Link exact to={"/"} activeClassName="active">Register Now</Link>
+          <Link exact to={"/register"} activeClassName="active">Register Now</Link>
         </p>
       </div>
       )
