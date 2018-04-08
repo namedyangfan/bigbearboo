@@ -26,9 +26,9 @@ export default class Header extends Component {
     return(
       <div>
         <nav>
-          <div class="header nav-wrapper">
-            <a href="#" class="brand-logo">Logo</a>
-            <ul id="nav-mobile" class="hide-on-med-and-down right">
+          <div className="header nav-wrapper">
+            <a href="#" className="brand-logo">Logo</a>
+            <ul id="nav-mobile" className="hide-on-med-and-down right">
               <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
               <li><NavLink to="/about" activeClassName="active">About</NavLink></li>
               <li><NavLink to="/contact" activeClassName="active">Contact</NavLink></li>
