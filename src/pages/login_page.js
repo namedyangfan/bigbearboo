@@ -68,7 +68,7 @@ export default class LoginPage extends Component {
         <Header/>
         <div className="container">
           <div className="row">
-            <div className="col s4 z-depth-4 card-panel  offset-s4">
+            <div className="col s6 z-depth-4 card-panel offset-s3">
               <div className="col s6 offset-s3">
                 <img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t31.0-8/10355539_887831341233354_8226884983048536509_o.jpg?_nc_cat=0&oh=96de39667c7fc17211039ee4fb7198e7&oe=5B319FCE"
                 alt="" className="circle responsive-img center-align" />
