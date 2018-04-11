@@ -43,8 +43,9 @@ export default class RegisterPage extends Component {
       // email                 : 'cedric.yf3@gmail.com',
       // password              : 'foobar',
       // password_confirmation : 'foobar'
+    console.log (`${process.env.PUBLIC_URL}auth/users`)
     const registerParams = this.state.registerParams || ''
-    axios.post('http://0.0.0.0:3000/auth/users', {
+    axios.post(`${process.env.PUBLIC_URL}auth/users`, {
       registerParams
     })
     .then((response) => {

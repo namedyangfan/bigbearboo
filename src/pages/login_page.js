@@ -8,9 +8,9 @@ export default class LoginPage extends Component {
   renderUserAccountInput = () => {
     return(
       <div className="row">
-        <div class="input-field col s12">
-          <i class="material-icons prefix">perm_identity</i>
-          <input id="icon_prefix" type="text" class="validate"/>
+        <div className="input-field col s12">
+          <i className="material-icons prefix">perm_identity</i>
+          <input id="icon_prefix" type="text" className="validate"/>
           <label for="icon_prefix">E-mail</label>
         </div>
       </div>
