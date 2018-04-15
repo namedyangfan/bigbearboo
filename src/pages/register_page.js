@@ -39,13 +39,8 @@ export default class RegisterPage extends Component {
   }
 
   handleCreatUser = () => {
-      //     name                  : 'Fan Yang',
-      // email                 : 'cedric.yf3@gmail.com',
-      // password              : 'foobar',
-      // password_confirmation : 'foobar'
-    console.log (`${process.env.PUBLIC_URL}auth/users`)
     const registerParams = this.state.registerParams || ''
-    axios.post(`${process.env.PUBLIC_URL}auth/users`, {
+    axios.post(`${process.env.PUBLIC_URL}auth/signup`, {
       registerParams
     })
     .then((response) => {
