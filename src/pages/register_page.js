@@ -123,7 +123,6 @@ export default class RegisterPage extends Component {
           </ul>
         </div>
       )
-
   }
 
   renderJoinNowButton = () =>{

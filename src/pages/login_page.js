@@ -10,12 +10,20 @@ export default class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email        : '',
-      password     : '',
-      loginSuccess : false
+      email             : '',
+      password          : '',
+      loginSuccess      : false,
+      loginErrorMessage : null
     };
   }
 
+  componentDidUpdate(prevProps, prevState){
+    if(this.state.email != prevState.email ||
+       this.state.password != prevState.password
+      ){
+      this.setState({loginErrorMessage:null})
+    }
+  }
   handleUserLogin = () => {
     const { email, password } = this.state;
     axios.post(`${process.env.PUBLIC_URL}auth/login`, {
@@ -25,10 +33,13 @@ export default class LoginPage extends Component {
     .then((response) => {
       if (response.status === 200){
         this.setState({loginSuccess: true})
+        console.log(response)
+      } else {
+        console.log (response)
       }
     })
     .catch((error) => {
-      console.log (error)
+      this.setState({loginErrorMessage: error.response.data.error})
     })
   }
 
@@ -96,6 +107,20 @@ export default class LoginPage extends Component {
       )
   }
 
+  renderHelpText(){
+    if (!this.state.loginErrorMessage) return
+    return (
+        <div className="col s12">
+          <ul>
+            <li className="red-text">
+              <i className="material-icons md-18 prefix">error</i>
+              <span>{this.state.loginErrorMessage}</span>
+            </li>
+          </ul>
+        </div>
+      )
+  }
+
   render() {
     if(this.state.loginSuccess){
       return( <Redirect to="/" /> )
@@ -115,6 +140,7 @@ export default class LoginPage extends Component {
                   {this.renderUserPasswordInput()}
                   {this.renderRememberMe()}
                   {this.renderLoginButton()}
+                  {this.renderHelpText()}
                   <div className="row">
                     {this.renderRegisterButton()}
                   </div>
