@@ -24,19 +24,32 @@ export default class Header extends Component {
   }
 
   handleClick = () => {
-    axios.get(`${process.env.PUBLIC_URL}auth/user`, {
-      params: {
-        user_id    : 14,
-        auth_token : 'lIQl3w2_llrpIu-SFdaZCQ'
+    // axios.get(`${process.env.PUBLIC_URL}auth/user`, {
+    //   params: {
+    //     user_id    : 14,
+    //     auth_token : 'WwimErchYGM3m7wDCzilyQ'
+    //   }
+    // })
+    // .then((response) => {
+    //     console.log(response)
+    //     console.log("show")
+    // })
+    // .catch((error) => {
+    //   console.log(error.response.data.errors)
+    //   console.log("$$$")
+    // })
+
+    axios.delete(`${process.env.PUBLIC_URL}auth/logout`, {
+      data: {
+        user_id    : 13,
+        auth_token : '1u2bWayBsu-43uc2MpFK-w'
       }
     })
     .then((response) => {
         console.log(response)
-        console.log("@@@@")
     })
     .catch((error) => {
       console.log(error.response.data.errors)
-      console.log("$$$")
     })
   }
 
