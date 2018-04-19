@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import { Route, Redirect } from 'react-router'
 import {Link} from 'react-router-dom'
-import Header from '.././components/header'
 
 var classNames = require('classnames')
 
@@ -127,7 +126,6 @@ export default class LoginPage extends Component {
     } else {
       return (
         <div>
-          <Header/>
           <div className="container">
             <div className="row">
               <div className="col s6 z-depth-4 card-panel offset-s3">

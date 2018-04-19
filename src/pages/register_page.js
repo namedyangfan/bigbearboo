@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router'
 import {Link} from 'react-router-dom'
-import Header from '.././components/header'
 import _ from 'lodash'
 
 var classNames = require('classnames');
@@ -139,7 +138,6 @@ export default class RegisterPage extends Component {
   render() {
     return(
       <div>
-        <Header/>
         <div className="container">
           <div className="row">
             <div className="col s6 z-depth-4 card-panel offset-s3">
