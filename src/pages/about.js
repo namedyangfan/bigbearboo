@@ -1,11 +1,7 @@
-import React from 'react'
-import Header from '../components/header'
+import React from 'react';
 
 export const About = () => (
-  <div>
-    <Header/>
-    <h1>This is a about page!</h1>
-  </div>
+  <h1>This is a about page!</h1>
 )
 
 export default About

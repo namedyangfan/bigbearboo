@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router'
 import {Link} from 'react-router-dom'
-import Header from '.././components/header'
 import _ from 'lodash'
 
 var classNames = require('classnames');
@@ -39,13 +38,8 @@ export default class RegisterPage extends Component {
   }
 
   handleCreatUser = () => {
-      //     name                  : 'Fan Yang',
-      // email                 : 'cedric.yf3@gmail.com',
-      // password              : 'foobar',
-      // password_confirmation : 'foobar'
-    console.log (`${process.env.PUBLIC_URL}auth/users`)
     const registerParams = this.state.registerParams || ''
-    axios.post(`${process.env.PUBLIC_URL}auth/users`, {
+    axios.post(`${process.env.PUBLIC_URL}auth/signup`, {
       registerParams
     })
     .then((response) => {
@@ -128,7 +122,6 @@ export default class RegisterPage extends Component {
           </ul>
         </div>
       )
-
   }
 
   renderJoinNowButton = () =>{
@@ -145,7 +138,6 @@ export default class RegisterPage extends Component {
   render() {
     return(
       <div>
-        <Header/>
         <div className="container">
           <div className="row">
             <div className="col s6 z-depth-4 card-panel offset-s3">
