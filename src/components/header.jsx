@@ -61,8 +61,6 @@ export default class Header extends Component {
             <a href="#" className="brand-logo">Logo</a>
             <ul id="nav-mobile" className="hide-on-med-and-down right">
               <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
-              <li><NavLink to="/about" activeClassName="active">About</NavLink></li>
-              <li><NavLink to="/contact" activeClassName="active">Contact</NavLink></li>
               <li><NavLink to="/login" activeClassName="active">Login</NavLink></li>
               <li>
                 <a className="btn waves-effect waves-light" type="button" onClick={this.handleClick}>

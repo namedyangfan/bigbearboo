@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import NaonaoImage from '../.././images/naonao.jpg'
+import { NavLink, Link } from 'react-router-dom'
 import _ from 'lodash'
 
 export default class ShopItem extends React.Component {
@@ -30,9 +31,11 @@ export default class ShopItem extends React.Component {
             <span>Naonnao</span>
           </div>
           <div className="card-action">
-            <span className="btn waves-effect waves-light" onClick={this.props.handleClick}>
-              <i className="material-icons">add_shopping_cart</i> Add
-            </span>
+            <Link to="/protected">
+              <span className="btn waves-effect waves-light" onClick={this.props.handleClick}>
+                <i className="material-icons">add_shopping_cart</i>
+              </span>
+            </Link>
           </div>
         </div>
       </li>
