@@ -6,7 +6,7 @@ import About from './pages/about'
 import LoginPage from './pages/login_page'
 import RegisterPage from './pages/register_page'
 
-var fakeAuth = {isAuthenticated : false}
+var fakeAuth = {isAuthenticated : true}
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (

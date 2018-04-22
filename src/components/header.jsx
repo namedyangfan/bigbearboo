@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom'
+import {connect} from 'react-redux';
 
 var classNames = require('classnames');
 
-export default class Header extends Component {
+class Header extends Component {
 
   constructor(props) {
     super();
@@ -64,7 +65,7 @@ export default class Header extends Component {
               <li><NavLink to="/login" activeClassName="active">Login</NavLink></li>
               <li>
                 <a className="btn waves-effect waves-light" type="button" onClick={this.handleClick}>
-                  <i className="material-icons left">shopping_cart</i> {this.props.numShopItem}
+                  <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
                 </a>
               </li>
             </ul>
@@ -74,3 +75,5 @@ export default class Header extends Component {
       );
   }
 }
+
+export default connect((state) => ({numberItems: state.numberItems}))(Header)
