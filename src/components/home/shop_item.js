@@ -4,7 +4,7 @@ import NaonaoImage from '../.././images/naonao.jpg'
 import { NavLink, Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import _ from 'lodash'
-import {currentUseItemNumberAdd} from '../.././actions/current_user_item_numbers_actions'
+import {addItemNumber} from '../.././actions/current_user_item_numbers_actions'
 
 class ShopItem extends React.Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class ShopItem extends React.Component {
 
   handleOnClick = () => {
     console.log(this.props)
-    this.props.currentUseItemNumberAdd(1)
+    this.props.addItemNumber(1)
     }
 
   renderItemCards(){
@@ -70,8 +70,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        currentUseItemNumberAdd: (number) => {
-            dispatch(currentUseItemNumberAdd(number));
+        addItemNumber: (number) => {
+            dispatch(addItemNumber(number));
         }
     };
 };
