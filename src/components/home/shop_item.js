@@ -64,7 +64,6 @@ class ShopItem extends React.Component {
 const mapStateToProps = (state) => {
   return {
       numberItems: state.numberItems,
-      testtest: state.testtest
   };
 };
 

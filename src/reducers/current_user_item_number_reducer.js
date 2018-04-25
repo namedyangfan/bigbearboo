@@ -1,28 +1,30 @@
-import * as itemNumberActions from '.././actions/current_user_item_numbers_actions'
+import * as actionTypes from '.././actions/actionTypes'
 
-const currentUserItemNumberReducer = (state =
-  {
+const initialState = {
   numberItems: 0,
-  testtest: 'asdasd',
   lastValues: []
-  }, action) => {
+}
+
+const currentUserItemNumberReducer = (state = initialState, action) => {
     switch (action.type){
-      case itemNumberActions.ADD_ITEM_NUMBER_SUCCESS:
+      case actionTypes.ADD_ITEM_NUMBER_SUCCESS:
         state = {
           ...state,
           numberItems: state.numberItems + action.payload,
           lastValues: [...state.lastValues, state.numberItems]
         }
-        break
-      case itemNumberActions.SUBTRACT_ITEM_NUMBER_SUCCESS:
+        return state
+      case actionTypes.SUBTRACT_ITEM_NUMBER_SUCCESS:
         state = {
           ...state,
           numberItems: state.numberItems - action.payload,
           lastValues: [...state.lastValues, action.payload]
         }
-        break
+        return state
+
+      default:
+        return state
     }
-    return state
 }
 
 export default currentUserItemNumberReducer

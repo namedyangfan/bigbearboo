@@ -1,9 +1,8 @@
-export const ADD_ITEM_NUMBER_SUCCESS = 'ADD_ITEM_NUMBER_SUCCESS'
-export const SUBTRACT_ITEM_NUMBER_SUCCESS = 'SUBTRACT_ITEM_NUMBER_SUCCESS'
+import * as actionTypes from './actionTypes'
 
 export const addItemNumberSuccess = (number) => {
   return {
-    type: ADD_ITEM_NUMBER_SUCCESS,
+    type: actionTypes.ADD_ITEM_NUMBER_SUCCESS,
     payload: number
   }
 }
@@ -18,7 +17,7 @@ export const addItemNumber = (number) => {
 
 export const currentUseItemNumberSubtract = (number) =>{
   return {
-    type: SUBTRACT_ITEM_NUMBER_SUCCESS,
+    type: actionTypes.SUBTRACT_ITEM_NUMBER_SUCCESS,
     payload: number
   }
 }
