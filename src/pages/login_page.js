@@ -2,10 +2,12 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import { Route, Redirect } from 'react-router'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux';
+import * as actions from '.././actions/auth'
 
 var classNames = require('classnames')
 
-export default class LoginPage extends Component {
+class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,21 +27,22 @@ export default class LoginPage extends Component {
   }
   handleUserLogin = () => {
     const { email, password } = this.state;
-    axios.post(`${process.env.PUBLIC_URL}auth/login`, {
-      email    : email,
-      password : password
-    })
-    .then((response) => {
-      if (response.status === 200){
-        this.setState({loginSuccess: true})
-        console.log(response)
-      } else {
-        console.log (response)
-      }
-    })
-    .catch((error) => {
-      this.setState({loginErrorMessage: error.response.data.error})
-    })
+    // axios.post(`${process.env.PUBLIC_URL}auth/login`, {
+    //   email    : email,
+    //   password : password
+    // })
+    // .then((response) => {
+    //   if (response.status === 200){
+    //     this.setState({loginSuccess: true})
+    //     console.log(response)
+    //   } else {
+    //     console.log (response)
+    //   }
+    // })
+    // .catch((error) => {
+    //   this.setState({loginErrorMessage: error.response.data.error})
+    // })
+    this.props.onAuth(email, password)
   }
 
   updateRegisterParameters = (e) => {
@@ -107,13 +110,14 @@ export default class LoginPage extends Component {
   }
 
   renderHelpText(){
-    if (!this.state.loginErrorMessage) return
+    console.log (this.props.error)
+    if (!this.props.error) return
     return (
         <div className="col s12">
           <ul>
             <li className="red-text">
               <i className="material-icons md-18 prefix">error</i>
-              <span>{this.state.loginErrorMessage}</span>
+              <span>{this.props.error.response.data.error}</span>
             </li>
           </ul>
         </div>
@@ -151,3 +155,19 @@ export default class LoginPage extends Component {
     }
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+      error: state.error,
+      token: state.token,
+      user_id: state.user_id,
+      loading: state.loading
+  };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: ( email, password) => dispatch( actions.auth( email, password) )
+    }
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( LoginPage );

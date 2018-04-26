@@ -1,9 +1,12 @@
 import React from 'react'
 import axios from 'axios'
 import NaonaoImage from '../.././images/naonao.jpg'
+import { NavLink, Link } from 'react-router-dom'
+import {connect} from 'react-redux';
 import _ from 'lodash'
+import {addItemNumber} from '../.././actions/current_user_item_numbers_actions'
 
-export default class ShopItem extends React.Component {
+class ShopItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +21,11 @@ export default class ShopItem extends React.Component {
     })
   }
 
+  handleOnClick = () => {
+    console.log(this.props)
+    this.props.addItemNumber(1)
+    }
+
   renderItemCards(){
     var a= this.state.data.map((value) =>
       <li className="col s3 clearfix::before">
@@ -30,8 +38,8 @@ export default class ShopItem extends React.Component {
             <span>Naonnao</span>
           </div>
           <div className="card-action">
-            <span className="btn waves-effect waves-light" onClick={this.props.handleClick}>
-              <i className="material-icons">add_shopping_cart</i> Add
+            <span className="btn waves-effect waves-light" onClick={this.handleOnClick}>
+              <i className="material-icons">add_shopping_cart</i>
             </span>
           </div>
         </div>
@@ -52,3 +60,19 @@ export default class ShopItem extends React.Component {
       );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+      numberItems: state.numberItems,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItemNumber: (number) => {
+            dispatch(addItemNumber(number));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShopItem)
