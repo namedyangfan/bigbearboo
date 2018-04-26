@@ -18,22 +18,22 @@ export const authSuccess = (token, user_id) => {
 export const authFail = (error) => {
   return{
     type : actionTypes.AUTH_FAIL,
-    error: error
+    error: error.response.data.error
   }
 }
 
 export const auth = (email, password) => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(authStart())
 
     axios.post(`${process.env.PUBLIC_URL}auth/login`, {
       email    : email,
       password : password
     })
-    .then((response) => {
+    .then( response => {
       dispatch(authSuccess(response.data.token, response.data.user_id));
     })
-    .catch((error) => {
+    .catch( error => {
       dispatch(authFail(error))
     })
 

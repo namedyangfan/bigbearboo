@@ -25,9 +25,11 @@ const authSuccess = (state, action) => {
 }
 
 const authFail = (state, action) => {
+  console.log ("@@@@")
+  console.log (action.error)
   return _.assign({}, state, {
-    error: action.error,
-    loading: false
+    error   : action.error,
+    loading : false
   })
 }
 
