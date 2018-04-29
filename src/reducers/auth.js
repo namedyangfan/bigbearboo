@@ -28,8 +28,6 @@ const authSuccess = (state, action) => {
 }
 
 const authFail = (state, action) => {
-  console.log ("@@@@")
-  console.log (action.error)
   return _.assign({}, state, {
     error   : action.error,
     loading : false,
@@ -45,12 +43,19 @@ const authLogOut = (state, action) => {
   })
 }
 
+const authValidateTokenSuccess = (state, action) => {
+  return _.assign({}, state, {
+    isAuthenticated: true
+  })
+}
+
 const authReducer = (state = initialState, action) => {
   switch (action.type){
     case actionTypes.AUTH_START: return authStart(state, action)
     case actionTypes.AUTH_SUCCESS: return authSuccess(state, action)
     case actionTypes.AUTH_FAIL: return authFail(state, action)
     case actionTypes.AUTH_LOGOUT: return authLogOut(state, action)
+    case actionTypes.AUTH_VALIDATETOKEN_SUCCESS: return authLogOut(state, action)
     default:
       return state;
   }

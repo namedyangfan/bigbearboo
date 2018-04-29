@@ -48,3 +48,43 @@ export const auth = (email, password) => {
     })
   }
 }
+
+export const authValidateTokenSuccess = (token, user_id) => {
+  return{
+    type    : actionTypes.AUTH_VALIDATETOKEN_SUCCESS,
+  }
+}
+
+export const authValidateToken = () => {
+
+  return dispatch => {
+    const token = localStorage.getItem('token')
+    const user_id = localStorage.getItem('user_id')
+
+    if (!token || !user_id){
+      dispatch(authLogOut())
+      console.log("Action authValidateToken: token or user_id not found")
+
+    } else {
+        dispatch(authStart())
+        //TODO: change the api and add header
+        console.log("authValidateToken start")
+        axios.get(`${process.env.PUBLIC_URL}auth/authenticate`, {
+          params: {
+            user_id : user_id,
+            token   : token
+          }
+        })
+        .then( response => {
+          console.log("authValidateToken success")
+          dispatch(authSuccess(response.data.token, response.data.user_id))
+        })
+        .catch( error => {
+          console.log("authValidateToken faild")
+          localStorage.removeItem('token')
+          localStorage.removeItem('user_id')
+          dispatch(authLogOut())
+        })
+      }
+  }
+}

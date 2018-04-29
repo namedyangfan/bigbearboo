@@ -1,25 +1,31 @@
 import React from 'react'
-import { Switch, Route, Redirect} from 'react-router-dom'
+import { Switch, Route, Redirect, withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
+import * as actions from './actions/auth'
 import  Home  from './pages/home'
 import Contact from './pages/contact'
 import About from './pages/about'
 import LoginPage from './pages/login_page'
 import RegisterPage from './pages/register_page'
 
-var fakeAuth = {isAuthenticated : true}
+var fakeAuth = {isAuthenticated : false}
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     fakeAuth.isAuthenticated === true
       ? <Component {...props} />
       : <Redirect to={{
-          pathname: '/login',
-          state: { from: props.location }
+          pathname : '/login',
+          state    : { from: props.location }
         }} />
   )} />
 )
 
 class App_routes extends React.Component {
+  componentDidMount () {
+    this.props.onValidateToken();
+  }
+
   render() {
     return(
       <main>
@@ -37,4 +43,16 @@ class App_routes extends React.Component {
   }
 }
 
-export default App_routes
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onValidateToken: () => dispatch( actions.authValidateToken() )
+  };
+};
+
+export default withRouter(connect( mapStateToProps, mapDispatchToProps )( App_routes ))

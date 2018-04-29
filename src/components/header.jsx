@@ -87,18 +87,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( Header );
-
-    // axios.get(`${process.env.PUBLIC_URL}auth/user`, {
-    //   params: {
-    //     user_id    : 14,
-    //     auth_token : 'WwimErchYGM3m7wDCzilyQ'
-    //   }
-    // })
-    // .then((response) => {
-    //     console.log(response)
-    //     console.log("show")
-    // })
-    // .catch((error) => {
-    //   console.log(error.response.data.errors)
-    //   console.log("$$$")
-    // })
