@@ -17,18 +17,17 @@ class ShopItem extends React.Component {
   componentWillMount(){
     axios.get('https://jsonplaceholder.typicode.com/posts')
     .then(res => {
-      this.setState({ data: _.slice(res.data,0,20) })
+      this.setState({ data: _.slice(res.data,0,10) })
     })
   }
 
   handleOnClick = () => {
-    console.log(this.props)
     this.props.addItemNumber(1)
     }
 
   renderItemCards(){
     var a= this.state.data.map((value) =>
-      <li className="col s3 clearfix::before">
+      <li className="col s12 m6 l4 clearfix::before">
         <div className="card">
           <div className="card-image">
             <img src={NaonaoImage} alt="Card image cap" />

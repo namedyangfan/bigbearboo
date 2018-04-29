@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux';
+import * as actions from '.././actions/auth'
 
 var classNames = require('classnames');
 
@@ -10,21 +11,83 @@ class Header extends Component {
   constructor(props) {
     super();
     this.state = {
-      HomeClass     : 'nav-item nav-link active',
     }
   }
 
-  onChangeTab(tab){
-    this.setState({
-      HomeClass : classNames({
-        'nav-item nav-link': true,
-        'active' : tab == 'Home'
-      })
+  handleClick = () => {
+
+    this.props.logOut()
+
+    axios.delete(`${process.env.PUBLIC_URL}auth/logout`, {
+      data: {
+        user_id    : this.props.user_id,
+        auth_token : this.props.token
+      }
     })
-    console.log(this.state.HomeClass)
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error.response.data.errors)
+    })
   }
 
-  handleClick = () => {
+  renderNavigationItems() {
+    if(this.props.isAuthenticated){
+      return(
+      <ul id="nav-mobile" className="right">
+        <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
+        <li><NavLink to="/login" activeClassName="active">Logout {this.props.user_id}</NavLink></li>
+        <li>
+          <a className="btn waves-effect waves-light" type="button" onClick={this.handleClick}>
+            <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
+          </a>
+        </li>
+      </ul>
+      )
+    }
+    return(
+      <ul id="nav-mobile" className="right">
+        <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
+        <li><NavLink to="/login" activeClassName="active">Login</NavLink></li>
+        <li>
+          <a className="btn waves-effect waves-light" type="button" onClick={this.handleClick}>
+            <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
+          </a>
+        </li>
+      </ul>
+    )
+  }
+
+  render() {
+    return(
+      <nav>
+        <div className="header nav-wrapper">
+          <a href="#" className="brand-logo left">Logo</a>
+          {this.renderNavigationItems()}
+        </div>
+      </nav>
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+      token           : state.auth.token,
+      user_id         : state.auth.user_id,
+      isAuthenticated : state.auth.isAuthenticated,
+      numberItems     : state.numberItems
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logOut: () => dispatch( actions.authLogOut())
+    }
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Header );
+
     // axios.get(`${process.env.PUBLIC_URL}auth/user`, {
     //   params: {
     //     user_id    : 14,
@@ -39,41 +102,3 @@ class Header extends Component {
     //   console.log(error.response.data.errors)
     //   console.log("$$$")
     // })
-
-    axios.delete(`${process.env.PUBLIC_URL}auth/logout`, {
-      data: {
-        user_id    : 13,
-        auth_token : '1u2bWayBsu-43uc2MpFK-w'
-      }
-    })
-    .then((response) => {
-        console.log(response)
-    })
-    .catch((error) => {
-      console.log(error.response.data.errors)
-    })
-  }
-
-  render() {
-    return(
-      <div>
-        <nav>
-          <div className="header nav-wrapper">
-            <a href="#" className="brand-logo">Logo</a>
-            <ul id="nav-mobile" className="hide-on-med-and-down right">
-              <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
-              <li><NavLink to="/login" activeClassName="active">Login</NavLink></li>
-              <li>
-                <a className="btn waves-effect waves-light" type="button" onClick={this.handleClick}>
-                  <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-      );
-  }
-}
-
-export default connect((state) => ({numberItems: state.numberItems}))(Header)

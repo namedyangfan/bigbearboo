@@ -22,6 +22,14 @@ export const authFail = (error) => {
   }
 }
 
+export const authLogOut = () => {
+  localStorage.removeItem('token')
+  localStorage.removeItem('user_id')
+  return{
+    type : actionTypes.AUTH_LOGOUT,
+  }
+}
+
 export const auth = (email, password) => {
   return dispatch => {
     dispatch(authStart())
@@ -31,12 +39,12 @@ export const auth = (email, password) => {
       password : password
     })
     .then( response => {
-      dispatch(authSuccess(response.data.token, response.data.user_id));
+      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('user_id', response.data.user_id)
+      dispatch(authSuccess(response.data.token, response.data.user_id))
     })
     .catch( error => {
       dispatch(authFail(error))
     })
-
   }
-
 }
