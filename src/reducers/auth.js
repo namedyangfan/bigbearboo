@@ -4,6 +4,7 @@ import _ from 'lodash'
 const initialState = {
   token: null,
   user_id: null,
+  isAuthenticated: false,
   error: null,
   loading: false
 }
@@ -11,7 +12,8 @@ const initialState = {
 const authStart = (state, action) => {
   return _.assign({}, state, {
     error   : null,
-    loading : false
+    loading : false,
+    isAuthenticated: false
   })
 }
 
@@ -20,14 +22,30 @@ const authSuccess = (state, action) => {
     token: action.token,
     user_id: action.user_id,
     error: null,
-    loading: false
+    loading: false,
+    isAuthenticated: true
   })
 }
 
 const authFail = (state, action) => {
   return _.assign({}, state, {
-    error: action.error,
-    loading: false
+    error   : action.error,
+    loading : false,
+    isAuthenticated: false
+  })
+}
+
+const authLogOut = (state, action) => {
+  return _.assign({}, state, {
+    token: null,
+    user_id: null,
+    isAuthenticated: false
+  })
+}
+
+const authValidateTokenSuccess = (state, action) => {
+  return _.assign({}, state, {
+    isAuthenticated: true
   })
 }
 
@@ -36,6 +54,8 @@ const authReducer = (state = initialState, action) => {
     case actionTypes.AUTH_START: return authStart(state, action)
     case actionTypes.AUTH_SUCCESS: return authSuccess(state, action)
     case actionTypes.AUTH_FAIL: return authFail(state, action)
+    case actionTypes.AUTH_LOGOUT: return authLogOut(state, action)
+    case actionTypes.AUTH_VALIDATETOKEN_SUCCESS: return authLogOut(state, action)
     default:
       return state;
   }

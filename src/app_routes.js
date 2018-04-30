@@ -1,35 +1,58 @@
 import React from 'react'
-import { Switch, Route, Redirect} from 'react-router-dom'
+import { Switch, Route, Redirect, withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
+import * as actions from './actions/auth'
 import  Home  from './pages/home'
 import Contact from './pages/contact'
 import About from './pages/about'
 import LoginPage from './pages/login_page'
 import RegisterPage from './pages/register_page'
 
-var fakeAuth = {isAuthenticated : true}
+var fakeAuth = {isAuthenticated : false}
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     fakeAuth.isAuthenticated === true
       ? <Component {...props} />
       : <Redirect to={{
-          pathname: '/login',
-          state: { from: props.location }
+          pathname : '/login',
+          state    : { from: props.location }
         }} />
   )} />
 )
 
-const App_routes = () => (
-  <main>
-    <Switch>
-      <Route exact path='/' component={Home}/>
-      <Route path="/about" component={About}/>
-      <Route path="/contact" component={Contact}/>
-      <Route path="/login" component={LoginPage}/>
-      <Route path="/register" component={RegisterPage}/>
-      <PrivateRoute path="/protected" component={About}/>
-    </Switch>
-  </main>
-)
+class App_routes extends React.Component {
+  componentDidMount () {
+    this.props.onValidateToken();
+  }
 
-export default App_routes
+  render() {
+    return(
+      <main>
+        <Switch>
+          <Route exact path='/' component={Home}/>
+          <Route path="/about" component={About}/>
+          <Route path="/contact" component={Contact}/>
+          <Route path="/login" component={LoginPage}/>
+          <Route path="/register" component={RegisterPage}/>
+          <PrivateRoute path="/protected" component={About}/>
+          <Redirect to="/" />
+        </Switch>
+      </main>
+    )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onValidateToken: () => dispatch( actions.authValidateToken() )
+  };
+};
+
+export default withRouter(connect( mapStateToProps, mapDispatchToProps )( App_routes ))

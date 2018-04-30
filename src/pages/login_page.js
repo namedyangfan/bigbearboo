@@ -27,21 +27,6 @@ class LoginPage extends Component {
   }
   handleUserLogin = () => {
     const { email, password } = this.state;
-    // axios.post(`${process.env.PUBLIC_URL}auth/login`, {
-    //   email    : email,
-    //   password : password
-    // })
-    // .then((response) => {
-    //   if (response.status === 200){
-    //     this.setState({loginSuccess: true})
-    //     console.log(response)
-    //   } else {
-    //     console.log (response)
-    //   }
-    // })
-    // .catch((error) => {
-    //   this.setState({loginErrorMessage: error.response.data.error})
-    // })
     this.props.onAuth(email, password)
   }
 
@@ -110,29 +95,29 @@ class LoginPage extends Component {
   }
 
   renderHelpText(){
-    console.log (this.props.error)
-    if (!this.props.error) return
-    return (
-        <div className="col s12">
-          <ul>
-            <li className="red-text">
-              <i className="material-icons md-18 prefix">error</i>
-              <span>{this.props.error.response.data.error}</span>
-            </li>
-          </ul>
-        </div>
-      )
+    if (this.props.error){
+      return (
+          <div className="col s12">
+            <ul>
+              <li className="red-text">
+                <i className="material-icons md-18 prefix">error</i>
+                <span>{this.props.error}</span>
+              </li>
+            </ul>
+          </div>
+        )
+    }
   }
 
   render() {
-    if(this.state.loginSuccess){
+    if(this.props.isAuthenticated){
       return( <Redirect to="/" /> )
     } else {
       return (
         <div>
           <div className="container">
             <div className="row">
-              <div className="col s6 z-depth-4 card-panel offset-s3">
+              <div className="col s10 m8 l6 z-depth-4 card-panel offset-s1 offset-m2 offset-l3">
                 <div className="col s6 offset-s3">
                   <img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t31.0-8/10355539_887831341233354_8226884983048536509_o.jpg?_nc_cat=0&oh=96de39667c7fc17211039ee4fb7198e7&oe=5B319FCE"
                   alt="" className="circle responsive-img center-align" />
@@ -158,10 +143,11 @@ class LoginPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      error: state.error,
-      token: state.token,
-      user_id: state.user_id,
-      loading: state.loading
+      error           : state.auth.error,
+      token           : state.auth.token,
+      user_id         : state.auth.user_id,
+      isAuthenticated : state.auth.isAuthenticated,
+      loading         : state.auth.loading
   };
 };
 const mapDispatchToProps = dispatch => {
