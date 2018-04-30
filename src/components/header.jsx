@@ -15,9 +15,10 @@ class Header extends Component {
   }
 
   handleClick = () => {
+    // onLogOut clear the the token from localStorage and state
+    this.props.onLogOut()
 
-    this.props.logOut()
-
+    // delete token from the backend
     axios.delete(`${process.env.PUBLIC_URL}auth/logout`, {
       data: {
         user_id    : this.props.user_id,
@@ -82,7 +83,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        logOut: () => dispatch( actions.authLogOut())
+        onLogOut: () => dispatch( actions.authLogOut())
     }
 }
 
