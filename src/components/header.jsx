@@ -15,14 +15,11 @@ class Header extends Component {
   }
 
   handleClick = () => {
-    // onLogOut clear the the token from localStorage and state
-    this.props.onLogOut()
-
     // delete token from the backend
     axios.delete(`${process.env.PUBLIC_URL}auth/logout`, {
       data: {
-        user_id    : this.props.user_id,
-        auth_token : this.props.token
+        user_id : this.props.user_id,
+        token   : localStorage.getItem('token')
       }
     })
     .then((response) => {
@@ -31,6 +28,8 @@ class Header extends Component {
     .catch((error) => {
       console.log(error.response.data.errors)
     })
+    // onLogOut clear the the token from localStorage and state
+    this.props.onLogOut()
   }
 
   renderNavigationItems() {
@@ -38,7 +37,7 @@ class Header extends Component {
       return(
       <ul id="nav-mobile" className="right">
         <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
-        <li><NavLink to="/login" activeClassName="active">Logout {this.props.user_id}</NavLink></li>
+        <li><NavLink to="/login" activeClassName="active">Logout {this.props.user_name}</NavLink></li>
         <li>
           <a className="btn waves-effect waves-light" type="button" onClick={this.handleClick}>
             <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
@@ -74,7 +73,7 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      token           : state.auth.token,
+      user_name       : state.auth.user_name,
       user_id         : state.auth.user_id,
       isAuthenticated : state.auth.isAuthenticated,
       numberItems     : state.numberItems

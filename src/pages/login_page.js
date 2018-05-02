@@ -144,7 +144,6 @@ class LoginPage extends Component {
 const mapStateToProps = (state) => {
   return {
       error           : state.auth.error,
-      token           : state.auth.token,
       user_id         : state.auth.user_id,
       isAuthenticated : state.auth.isAuthenticated,
       loading         : state.auth.loading
