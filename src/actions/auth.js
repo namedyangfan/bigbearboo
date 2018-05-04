@@ -7,11 +7,11 @@ export const authStart = () => {
   }
 }
 
-export const authSuccess = (token, user_id) => {
+export const authSuccess = (user_id, user_name) => {
   return{
-    type    : actionTypes.AUTH_SUCCESS,
-    token   : token,
-    user_id : user_id
+    type      : actionTypes.AUTH_SUCCESS,
+    user_id   : user_id,
+    user_name : user_name
   }
 }
 
@@ -41,17 +41,13 @@ export const auth = (email, password) => {
     .then( response => {
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('user_id', response.data.user_id)
-      dispatch(authSuccess(response.data.token, response.data.user_id))
+      dispatch(authSuccess(response.data.user_id,
+                           response.data.user_name
+                           ))
     })
     .catch( error => {
       dispatch(authFail(error))
     })
-  }
-}
-
-export const authValidateTokenSuccess = (token, user_id) => {
-  return{
-    type    : actionTypes.AUTH_VALIDATETOKEN_SUCCESS,
   }
 }
 
@@ -67,7 +63,6 @@ export const authValidateToken = () => {
 
     } else {
         dispatch(authStart())
-        //TODO: change the api and add header
         console.log("authValidateToken start")
         axios.get(`${process.env.PUBLIC_URL}auth/authenticate`, {
           params: {
@@ -77,7 +72,9 @@ export const authValidateToken = () => {
         })
         .then( response => {
           console.log("authValidateToken success")
-          dispatch(authSuccess(response.data.token, response.data.user_id))
+          dispatch(authSuccess(response.data.user_id,
+                               response.data.user_name
+                              ))
         })
         .catch( error => {
           console.log("authValidateToken faild")

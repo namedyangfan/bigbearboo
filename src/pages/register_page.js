@@ -2,11 +2,13 @@ import axios from 'axios'
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux';
 import _ from 'lodash'
+import * as actions from '.././actions/auth'
 
 var classNames = require('classnames');
 
-export default class RegisterPage extends Component {
+class RegisterPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +18,6 @@ export default class RegisterPage extends Component {
       password_confirmation : '',
       registerParams        : {},
       registerError         : false,
-      registerComplete      : false,
       errorMessage          : null
     };
   }
@@ -38,24 +39,20 @@ export default class RegisterPage extends Component {
   }
 
   handleCreatUser = () => {
-    const registerParams = this.state.registerParams || ''
+    if (_.isEmpty(this.state.registerParams)) return
+    const registerParams = this.state.registerParams
     axios.post(`${process.env.PUBLIC_URL}auth/signup`, {
       registerParams
     })
     .then((response) => {
-      if(response.data.errors){
-        this.setState({
-          errorMessage  : response.data.errors,
-          registerError : true
-        })
-      }
-      else{
-        this.setState({ registerComplete : true})
-      }
+      this.props.onAuth(registerParams.email, registerParams.password)
     })
-    .catch((error) => {
-
-    });
+    .catch((errors) => {
+      this.setState({
+        errorMessage  : errors.response.data.errors,
+        registerError : true
+      })
+    })
   }
 
   renderEnterName = () => {
@@ -108,7 +105,7 @@ export default class RegisterPage extends Component {
   }
 
   renderHelpText(){
-    if (!this.state.registerError) return
+    if (!this.state.registerError || !this.state.errorMessage) return
     const l = this.state.errorMessage.map((value)=>
       <li className="red-text">
         <i className="material-icons md-18 prefix">error</i>
@@ -125,7 +122,6 @@ export default class RegisterPage extends Component {
   }
 
   renderJoinNowButton = () =>{
-    if(this.state.registerComplete) return (<Redirect to="/login" />)
     return(
       <div className="row">
         <div className="col s12">
@@ -136,8 +132,10 @@ export default class RegisterPage extends Component {
   }
 
   render() {
-    return(
-      <div>
+    if(this.props.isAuthenticated){
+      return( <Redirect to="/" /> )
+    } else {
+      return(
         <div className="container">
           <div className="row">
             <div className="col s6 z-depth-4 card-panel offset-s3">
@@ -155,7 +153,24 @@ export default class RegisterPage extends Component {
             </div>
           </div>
         </div>
-      </div>
-      );
+      )
+    }
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+      user_name       : state.auth.user_name,
+      user_id         : state.auth.user_id,
+      isAuthenticated : state.auth.isAuthenticated,
+      numberItems     : state.numberItems
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: ( email, password) => dispatch( actions.auth( email, password) )
+    }
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( RegisterPage )
