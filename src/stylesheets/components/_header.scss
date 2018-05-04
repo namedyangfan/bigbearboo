@@ -2,4 +2,20 @@
   .active{
     background-color: #ea454b;
   }
+
+  .dropdown-root-container{
+    padding: 0px;
+    background-color: #ee6e73;
+
+    .Dropdown-control{
+      padding: 0 15px;
+      background-color: #ee6e73;
+      border: 0;
+      color: #fff;
+    }
+
+    .Dropdown-menu{
+      max-height: 300px;
+    }
+  }
 }

@@ -1,8 +1,10 @@
 import axios from 'axios'
 import React, { Component } from 'react';
-import { NavLink, Link, Redirect} from 'react-router-dom'
+import Dropdown from 'react-dropdown'
+import { NavLink, Link, Redirect, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 import * as actions from '.././actions/auth'
+import _ from 'lodash'
 
 var classNames = require('classnames');
 
@@ -11,10 +13,12 @@ class Header extends Component {
   constructor(props) {
     super();
     this.state = {
+      redirectMyOrders: false,
+      redirectMyProfile: false
     }
   }
 
-  handleClick = () => {
+  logOutUser = () => {
     // delete token from the backend
     axios.delete(`${process.env.PUBLIC_URL}auth/logout`, {
       data: {
@@ -32,14 +36,37 @@ class Header extends Component {
     this.props.onLogOut()
   }
 
+  handleDropdownClick = (e) => {
+    if(e.value == "Logout"){
+      this.logOutUser()
+    } else if (e.value == "My Profile"){
+      this.setState({ redirectMyOrders:true })
+      console.log ('handleDropdownClick' + e)
+    } else {
+      <NavLink to="/about" activeClassName="active">About</NavLink>
+    }
+  }
+
   renderNavigationItems() {
+    console.log('@@@@@@@@')
+    console.log('@@@@@@@@')
+    console.log('@@@@@@@@')
+    console.log('@@@@@@@@')
+    console.log('header rendered')
+    console.log(this.props)
+    let options = ['My Profile', 'My Orders', 'Logout']
+
     if(this.props.isAuthenticated){
       return(
+
       <ul id="nav-mobile" className="right">
         <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
-        <li><NavLink to="/login" activeClassName="active">Logout {this.props.user_name}</NavLink></li>
         <li>
-          <a className="btn waves-effect waves-light" type="button" onClick={this.handleClick}>
+          <Dropdown className = "dropdown-root-container" options={options} onChange={this.handleDropdownClick}
+            placeholder={_.capitalize(this.props.user_name)} />
+        </li>
+        <li>
+          <a className="btn waves-effect waves-light" type="button" onClick={this.logOutUser}>
             <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
           </a>
         </li>
@@ -60,6 +87,7 @@ class Header extends Component {
   }
 
   render() {
+    if (this.state.redirectMyOrders) { return (<Redirect to="/about" />) }
     return(
       <nav>
         <div className="header nav-wrapper">
@@ -86,4 +114,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( Header );
+export default withRouter(connect( mapStateToProps, mapDispatchToProps )( Header ));

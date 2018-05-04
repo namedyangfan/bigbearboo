@@ -6,13 +6,15 @@ import store from "./store";
 import {Provider} from "react-redux";
 
 const App = () => (
-  <Provider store={store}>
-    <BrowserRouter>
-      <HomePageLayout>
-        <App_routes />
-      </HomePageLayout>
-    </BrowserRouter>
-  </Provider>
+  <div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <HomePageLayout>
+          <App_routes />
+        </HomePageLayout>
+      </BrowserRouter>
+    </Provider>
+  </div>
 )
 
 export default App
