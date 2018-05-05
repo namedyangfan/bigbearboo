@@ -6,7 +6,6 @@ import {Provider} from "react-redux";
 import registerServiceWorker from './registerServiceWorker';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
-import 'react-dropdown/style.css'
 import './stylesheets/main.scss';
 import store from "./store";
 

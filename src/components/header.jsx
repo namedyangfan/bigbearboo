@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { Component } from 'react';
-import Dropdown from 'react-dropdown'
 import { NavLink, Link, Redirect, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 import * as actions from '.././actions/auth'
@@ -37,17 +36,43 @@ class Header extends Component {
 
   handleDropdownClick = (event) => {
     event.preventDefault()
-    this.setState({dropDownIsSelected: true})
+    if (!this.state.dropDownIsSelected) {
+      // attach/remove event handler
+      document.addEventListener('click', this.handleOutsideClick, false);
+    } else {
+      document.removeEventListener('click', this.handleOutsideClick, false);
+    }
+
+    this.setState({dropDownIsSelected: !this.state.dropDownIsSelected})
+  }
+
+  handleOutsideClick = (e) => {
+    // ignore clicks on the component itself
+    if (this.node.contains(e.target)) {
+      return;
+    }
+    this.handleDropdownClick(e)
   }
 
   renderDropDown = () => {
     return(
-        <div className="Dropdown-menu">
-          <NavLink className="Dropdown-option" to="/about"
-            activeClassName="is-selected">about</NavLink>
-          <NavLink className="Dropdown-option" to="/Contact"
-            activeClassName="is-selected">Contact</NavLink>
+      <div className="dropdown-root-container" ref={node => { this.node = node}}>
+        <div className="Dropdown-control" onClick={this.handleDropdownClick}>
+          {_.capitalize(this.props.user_name)}
         </div>
+        {
+          this.state.dropDownIsSelected
+            ? (
+              <div className="Dropdown-menu">
+                <NavLink className="Dropdown-option" to="/about"
+                  activeClassName="is-selected">about</NavLink>
+                <NavLink className="Dropdown-option" to="/Contact"
+                  activeClassName="is-selected">Contact</NavLink>
+              </div>
+              )
+            : (null)
+          }
+      </div>
     )
   }
 
@@ -56,30 +81,19 @@ class Header extends Component {
 
     if(this.props.isAuthenticated){
       return(
-
-      <ul id="nav-mobile" className="right">
-        <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
-        <li>
-          <Dropdown className = "dropdown-root-container" options={options} placeholder={_.capitalize(this.props.user_name)} />
-        </li>
-        <li>
-          <div className="dropdown-root-container">
-            <div className="Dropdown-control" onClick={this.handleDropdownClick}>
-              {_.capitalize(this.props.user_name)}
-            </div>
-            {
-              this.state.dropDownIsSelected
-                ? (this.renderDropDown())
-                : (null)
-              }
-          </div>
-        </li>
-        <li>
-          <a className="btn waves-effect waves-light" type="button" onClick={this.logOutUser}>
-            <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
-          </a>
-        </li>
-      </ul>
+      <div>
+        <ul id="nav-mobile" className="right">
+          <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
+          <li>
+            {this.renderDropDown()}
+          </li>
+          <li>
+            <a className="btn waves-effect waves-light" type="button" onClick={this.logOutUser}>
+              <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
+            </a>
+          </li>
+        </ul>
+      </div>
       )
     }
     return(
