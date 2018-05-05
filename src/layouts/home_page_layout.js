@@ -8,7 +8,9 @@ export default class HomePageLayout extends React.Component {
     return (
       <div>
         <Header />
-          {this.props.children}
+          <main>
+            {this.props.children}
+          </main>
         <Footer />
       </div>
       );

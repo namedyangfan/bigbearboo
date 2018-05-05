@@ -13,8 +13,7 @@ class Header extends Component {
   constructor(props) {
     super();
     this.state = {
-      redirectMyOrders: false,
-      redirectMyProfile: false
+      dropDownIsSelected: false
     }
   }
 
@@ -36,24 +35,23 @@ class Header extends Component {
     this.props.onLogOut()
   }
 
-  handleDropdownClick = (e) => {
-    if(e.value == "Logout"){
-      this.logOutUser()
-    } else if (e.value == "My Profile"){
-      this.setState({ redirectMyOrders:true })
-      console.log ('handleDropdownClick' + e)
-    } else {
-      <NavLink to="/about" activeClassName="active">About</NavLink>
-    }
+  handleDropdownClick = (event) => {
+    event.preventDefault()
+    this.setState({dropDownIsSelected: true})
+  }
+
+  renderDropDown = () => {
+    return(
+        <div className="Dropdown-menu">
+          <NavLink className="Dropdown-option" to="/about"
+            activeClassName="is-selected">about</NavLink>
+          <NavLink className="Dropdown-option" to="/Contact"
+            activeClassName="is-selected">Contact</NavLink>
+        </div>
+    )
   }
 
   renderNavigationItems() {
-    console.log('@@@@@@@@')
-    console.log('@@@@@@@@')
-    console.log('@@@@@@@@')
-    console.log('@@@@@@@@')
-    console.log('header rendered')
-    console.log(this.props)
     let options = ['My Profile', 'My Orders', 'Logout']
 
     if(this.props.isAuthenticated){
@@ -62,8 +60,19 @@ class Header extends Component {
       <ul id="nav-mobile" className="right">
         <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
         <li>
-          <Dropdown className = "dropdown-root-container" options={options} onChange={this.handleDropdownClick}
-            placeholder={_.capitalize(this.props.user_name)} />
+          <Dropdown className = "dropdown-root-container" options={options} placeholder={_.capitalize(this.props.user_name)} />
+        </li>
+        <li>
+          <div className="dropdown-root-container">
+            <div className="Dropdown-control" onClick={this.handleDropdownClick}>
+              {_.capitalize(this.props.user_name)}
+            </div>
+            {
+              this.state.dropDownIsSelected
+                ? (this.renderDropDown())
+                : (null)
+              }
+          </div>
         </li>
         <li>
           <a className="btn waves-effect waves-light" type="button" onClick={this.logOutUser}>
@@ -115,3 +124,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default withRouter(connect( mapStateToProps, mapDispatchToProps )( Header ));
+
+          // <Dropdown className = "dropdown-root-container" options={options} onChange={this.handleDropdownClick}
+          //   placeholder={_.capitalize(this.props.user_name)} />
