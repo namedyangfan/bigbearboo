@@ -61,19 +61,6 @@ class LoginPage extends Component {
       )
   }
 
-  renderRememberMe = () =>{
-    return(
-        <div className="input-field col s12 login-text">
-          <p>
-            <label>
-              <input type="checkbox"/>
-              <span>Remember me</span>
-            </label>
-          </p>
-        </div>
-      )
-  }
-
   renderLoginButton = () =>{
     return(
       <div className="row">
@@ -125,7 +112,6 @@ class LoginPage extends Component {
                 <form className="login-form">
                   {this.renderUserAccountInput()}
                   {this.renderUserPasswordInput()}
-                  {this.renderRememberMe()}
                   {this.renderLoginButton()}
                   {this.renderHelpText()}
                   <div className="row">
