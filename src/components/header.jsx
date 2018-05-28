@@ -56,7 +56,7 @@ class Header extends Component {
 
   renderDropDown = () => {
     return(
-      <div className="dropdown-root-container" ref={node => { this.node = node}}>
+      <div className="dropdown-root-container red accent-1" ref={node => { this.node = node}}>
         <div className="Dropdown-control" onClick={this.handleDropdownClick}>
           {_.capitalize(this.props.user_name)}
         </div>
@@ -88,7 +88,7 @@ class Header extends Component {
             {this.renderDropDown()}
           </li>
           <li>
-            <a className="btn waves-effect waves-light" type="button" onClick={this.logOutUser}>
+            <a className="waves-effect waves-light btn" onClick={this.logOutUser}>
               <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
             </a>
           </li>

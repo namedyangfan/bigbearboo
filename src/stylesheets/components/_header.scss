@@ -7,12 +7,12 @@
     padding: 0px;
     background-color: #ee6e73;
     position: relative;
-
+    min-width:100px;
+    text-align: center;
+    
     .Dropdown-control{
       position: relative;
       overflow: hidden;
-      background-color: white;
-      border: 1px solid #ccc;
       border-radius: 2px;
       box-sizing: border-box;
       color: #333;
