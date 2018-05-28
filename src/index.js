@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { NavLink, Link } from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom'
+import {Provider} from "react-redux";
 import registerServiceWorker from './registerServiceWorker';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 import './stylesheets/main.scss';
+import store from "./store";
 
-var classNames = require('classnames');
+const app = (
+    <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+    </Provider>
+);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render( app, document.getElementById('root'));
 registerServiceWorker();

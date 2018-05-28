@@ -28,17 +28,14 @@ class App_routes extends React.Component {
 
   render() {
     return(
-      <main>
-        <Switch>
+      <Switch>
           <Route exact path='/' component={Home}/>
           <Route path="/about" component={About}/>
           <Route path="/contact" component={Contact}/>
           <Route path="/login" component={LoginPage}/>
           <Route path="/register" component={RegisterPage}/>
-          <PrivateRoute path="/protected" component={About}/>
           <Redirect to="/" />
-        </Switch>
-      </main>
+      </Switch>
     )
   }
 }

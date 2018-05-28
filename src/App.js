@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import App_routes from "./app_routes"
-import {BrowserRouter, Switch, Route, Link} from 'react-router-dom'
+import {BrowserRouter, Route, withRouter} from 'react-router-dom'
 import HomePageLayout from './layouts/home_page_layout'
-import store from "./store";
-import {Provider} from "react-redux";
 
-const App = () => (
-  <Provider store={store}>
-    <BrowserRouter>
-      <HomePageLayout>
-        <App_routes />
-      </HomePageLayout>
-    </BrowserRouter>
-  </Provider>
-)
+class App extends Component {
+  render (){
+    return(
+      <div>
+        <HomePageLayout>
+          <App_routes />
+        </HomePageLayout>
+      </div>
+    )
+  }
+}
 
-export default App
+export default withRouter(App)
