@@ -16,8 +16,10 @@ class Header extends Component {
     }
   }
 
-  logOutUser = () => {
+  logOutUser = (e) => {
     // delete token from the backend
+    document.removeEventListener('click', this.handleOutsideClick, false)
+
     axios.delete(`${process.env.PUBLIC_URL}auth/logout`, {
       data: {
         user_id : this.props.user_id,
@@ -64,9 +66,11 @@ class Header extends Component {
           this.state.dropDownIsSelected
             ? (
               <div className="Dropdown-menu">
+                <NavLink className="Dropdown-option" to="/admin"
+                  activeClassName="is-selected">Admin</NavLink>
                 <NavLink className="Dropdown-option" to="/about"
                   activeClassName="is-selected">about</NavLink>
-                <NavLink className="Dropdown-option" to="/Contact"
+                <NavLink className="Dropdown-option" to="/contact"
                   activeClassName="is-selected">Contact</NavLink>
               </div>
               )
@@ -101,7 +105,7 @@ class Header extends Component {
         <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
         <li><NavLink to="/login" activeClassName="active">Login</NavLink></li>
         <li>
-          <a className="btn waves-effect waves-light" type="button" onClick={this.handleClick}>
+          <a className="btn waves-effect waves-light" onClick={this.handleClick}>
             <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
           </a>
         </li>
@@ -114,7 +118,9 @@ class Header extends Component {
     return(
       <nav>
         <div className="header nav-wrapper">
-          <a href="#" className="brand-logo left">Logo</a>
+          <div className="container">
+            <NavLink className="brand-logo left" to="/home">Logo</NavLink>
+          </div>
           {this.renderNavigationItems()}
         </div>
       </nav>

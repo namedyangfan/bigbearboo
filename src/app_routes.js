@@ -7,6 +7,8 @@ import Contact from './pages/contact'
 import About from './pages/about'
 import LoginPage from './pages/login_page'
 import RegisterPage from './pages/register_page'
+import AdminPage from './pages/admin_page'
+import AdminProductPage from './pages/admin_product_page'
 
 var fakeAuth = {isAuthenticated : false}
 
@@ -34,6 +36,8 @@ class App_routes extends React.Component {
           <Route path="/contact" component={Contact}/>
           <Route path="/login" component={LoginPage}/>
           <Route path="/register" component={RegisterPage}/>
+          <Route exact path="/admin" component={AdminPage}/>
+          <Route path="/admin/product/:id" component={AdminProductPage}/>
           <Redirect to="/" />
       </Switch>
     )
