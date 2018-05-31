@@ -8,11 +8,15 @@ import * as HomeProductsApi from 'api/home_products'
 import {addItemNumber} from 'actions/current_user_item_numbers_actions'
 
 class ProductCard extends React.Component {
+  handleOnClick = () => {
+    console.log('PRODUCTCARD ONCLICK')
+  }
+
   render(){
     return(
         <div className="col s12 m6 l4">
-          <div className="card medium">
-            <div className="test">
+          <div className="card medium" onClick={this.handleOnClick}>
+            <div className="product-card">
               <img src={this.props.product.picture}/>
             </div>
             <div className="card-content">
@@ -55,9 +59,11 @@ class ShopItem extends React.Component {
 
   render() {
     return (
-      <div className="section">
-        <div className="row">
-          {this.renderProductCards()}
+      <div className="shop-item">
+        <div className="container">
+          <div className="row">
+            {this.renderProductCards()}
+          </div>
         </div>
       </div>
       );
