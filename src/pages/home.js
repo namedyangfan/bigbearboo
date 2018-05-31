@@ -19,7 +19,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-        <ShopItem handleClick={this.handleAddShopItem}/>
+        <ShopItem handleClick={this.handleAddShopItem} history={this.props.history}/>
       );
   }
 }

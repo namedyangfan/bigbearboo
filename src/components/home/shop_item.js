@@ -1,6 +1,4 @@
 import React from 'react'
-import axios from 'axios'
-import NaonaoImage from '../.././images/naonao.jpg'
 import { NavLink, Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import _ from 'lodash'
@@ -10,6 +8,7 @@ import {addItemNumber} from 'actions/current_user_item_numbers_actions'
 class ProductCard extends React.Component {
   handleOnClick = () => {
     console.log('PRODUCTCARD ONCLICK')
+    this.props.history.push(`/product/${this.props.id}`)
   }
 
   render(){
@@ -49,10 +48,9 @@ class ShopItem extends React.Component {
   }
 
   renderProductCards = () => {
-    console.log("PRODUCTSCARDS"+JSON.stringify(this.state.products))
     return(
       _.map(this.state.products, (product) => 
-        <ProductCard product={product}/>      
+        <ProductCard product={product} id={product.id} history={this.props.history}/>      
       )
     )
   }
