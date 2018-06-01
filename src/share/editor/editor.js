@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import _ from 'lodash'
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
@@ -32,13 +33,18 @@ export default class EditorConvertToHTML extends Component {
     }
   }
 
-  onEditorStateChange: Function = (editorState) => {
+  hadnleParentUpdate = _.debounce( (editorState) => {
+    this.props.onChange(
+      draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    )
+  }, 800)
+
+  onEditorStateChange = (editorState) => {
     this.setState({ editorState })
 
     if (this.props.onChange) {
-      this.props.onChange(
-        draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
-    )}
+      this.hadnleParentUpdate(editorState)
+    }
   };
 
   render() {

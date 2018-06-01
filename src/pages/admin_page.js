@@ -26,7 +26,7 @@ export class Row extends React.Component {
 
   render(){
     return(
-      <tr className="hoverable" onClick={this.handleClick}>
+      <tr className="" onClick={this.handleClick}>
         {this.renderCells(this.props.row)}
       </tr>
     )
@@ -77,7 +77,7 @@ export default class AdminPage extends React.Component {
     return(
       <div className="row">
         <div className="col s10 m10 l10 card-panel offset-s1 offset-m1 offset-l1">
-          <table>
+          <table className="highlight">
             <thead>
               <tr>
                 {this.renderColumnNames()}

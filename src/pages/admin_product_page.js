@@ -35,10 +35,10 @@ export default class AdminProduct extends React.Component {
     this.setState({ [id]: value })
   }
 
-  updateDetail = _.debounce((e) => {
+  updateDetail = (e) => {
     console.log("UPDATEDETAIL")
     this.setState({ detail: e })
-  }, 500) 
+  } 
 
   handleSubmit = (e) => {
     const stateParams = _.assign({}, this.state)
