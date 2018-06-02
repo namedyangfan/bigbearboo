@@ -9,6 +9,7 @@ import './stylesheets/main.scss';
 import store from "./store";
 import $ from 'jquery';
 import * as _ from 'lodash';
+import 'react-dropdown/style.css'
 
 window.jQuery = window.$ = $;
 window._ = window.$ = $;
