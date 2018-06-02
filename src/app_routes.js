@@ -2,9 +2,11 @@ import React from 'react'
 import { Switch, Route, Redirect, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import * as actions from './actions/auth'
+
 import  Home  from './pages/home'
 import Contact from './pages/contact'
 import About from './pages/about'
+import ProductPage from 'pages/product_page'
 import LoginPage from './pages/login_page'
 import RegisterPage from './pages/register_page'
 import AdminPage from './pages/admin_page'
@@ -33,6 +35,7 @@ class App_routes extends React.Component {
       <Switch>
           <Route exact path='/' component={Home}/>
           <Route path="/about" component={About}/>
+          <Route path="/product/:id" component={ProductPage}/>
           <Route path="/contact" component={Contact}/>
           <Route path="/login" component={LoginPage}/>
           <Route path="/register" component={RegisterPage}/>

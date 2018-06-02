@@ -1,7 +1,25 @@
-.test {
-  height: 80%;
-}
-.test img {
-  height: 100%;
-  width: 100%;
+.shop-item{
+  .product-card {
+    height: 80%;
+  }
+  .product-card img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .container {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 90%;
+  }
+  @media only screen and (min-width: 601px) {
+    .container {
+      width: 95%;
+    }
+  }
+  @media only screen and (min-width: 993px) {
+    .container {
+      width: 90%;
+    }
+  }
 }
