@@ -1,6 +1,18 @@
 import React from 'react'
+import _ from 'lodash'
 import $ from 'jquery'
 import Dropdown from 'react-dropdown'
+
+export class VarianceTag extends React.Component {
+
+  render(){
+    return(
+      <div className='chip'>
+        {this.props.attribute.name}
+      </div> 
+    )
+  }
+}
 
 export default class ProductOverview extends React.Component {
   constructor(props) {
@@ -27,6 +39,14 @@ export default class ProductOverview extends React.Component {
           CA${this.props.product && this.props.product.price}
         </h7>
       </div>
+    )
+  }
+
+  renderVariance = () => {
+    return(
+      _.map(this.props.product && this.props.product.attributes, (value) => 
+        <VarianceTag attribute={value}/>
+      )
     )
   }
 
@@ -70,6 +90,7 @@ export default class ProductOverview extends React.Component {
       <div className="col s12 m5 l4">
           {this.renderName()}
           {this.renderPrice()}
+          {this.renderVariance()}
           {this.renderQuantity()}
           {this.renderAddtoCartButton()}
           {this.renderDescription()}
