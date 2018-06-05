@@ -8,7 +8,7 @@ import {addItemNumber} from 'actions/current_user_item_numbers_actions'
 class ProductCard extends React.Component {
   handleOnClick = () => {
     console.log('PRODUCTCARD ONCLICK')
-    this.props.history.push(`/product/${this.props.id}`)
+    this.props.history.push(`/product/${this.props.product_id}`)
   }
 
   render(){
@@ -50,7 +50,7 @@ class ShopItem extends React.Component {
   renderProductCards = () => {
     return(
       _.map(this.state.products, (product) => 
-        <ProductCard product={product} id={product.id} history={this.props.history}/>      
+        <ProductCard product={product} product_id={product.product_id} history={this.props.history}/>      
       )
     )
   }

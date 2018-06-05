@@ -8,7 +8,7 @@ export class Row extends React.Component {
 
   handleClick = () => {
     console.log( this.props.match.params)
-    this.props.history.push(`/admin/product/${this.props.row.id}`)
+    this.props.history.push(`/admin/product/${this.props.row.product_id}`)
   }
 
   renderCells(row){

@@ -31,7 +31,7 @@ export default class AdminProduct extends React.Component {
 
   getProducts = () => {
     const params = {product_id: this.props.match.params.id}
-
+    
     AdminProductsApi.show(params)
     .then((response) => {
       console.log(response.data)
@@ -61,7 +61,6 @@ export default class AdminProduct extends React.Component {
       price       : stateParams.price,
       description : stateParams.description,
       detail      : stateParams.detail,
-      name        : stateParams.name,
       catagory    : stateParams.catagory,
       picture     : stateParams.picture
     }
@@ -150,7 +149,7 @@ export default class AdminProduct extends React.Component {
         <div className="col s10 m10 l10 offset-s1 offset-m1 offset-l1">
           {this.renderTitle()}
           <ProductVariance attributes={this.state.attributes} getProducts={this.getProducts}
-            product_id={this.state.id}/>
+            product_id={this.state.product_id}/>
           {this.renderPicture()}
           {this.renderDescription()}
           {this.renderDetail()}
