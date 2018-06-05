@@ -8,7 +8,7 @@ export default class ProductPage extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      product_id: 1,
+      product_id: null,
     }
   }
 

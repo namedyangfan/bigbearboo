@@ -13,19 +13,19 @@ export default class ProductOverview extends React.Component {
   renderName = () => {
     return(
       <div>
-        <h5>
+        <h6>
           {this.props.product && this.props.product.name}
-        </h5>
+        </h6>
       </div>
     )
   }
 
   renderPrice = () => {
     return(
-      <div>
-        <h4>
-          CA$ 999
-        </h4>
+      <div className='section'>
+        <h7>
+          CA${this.props.product && this.props.product.price}
+        </h7>
       </div>
     )
   }
