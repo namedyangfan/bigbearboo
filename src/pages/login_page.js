@@ -5,8 +5,6 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import * as actions from '.././actions/auth'
 
-var classNames = require('classnames')
-
 class LoginPage extends Component {
   constructor(props) {
     super(props);

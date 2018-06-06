@@ -8,13 +8,13 @@ import {addItemNumber} from 'actions/current_user_item_numbers_actions'
 class ProductCard extends React.Component {
   handleOnClick = () => {
     console.log('PRODUCTCARD ONCLICK')
-    this.props.history.push(`/product/${this.props.id}`)
+    this.props.history.push(`/product/${this.props.product_id}`)
   }
 
   render(){
     return(
         <div className="col s12 m6 l4">
-          <div className="card medium" onClick={this.handleOnClick}>
+          <div className="card large" onClick={this.handleOnClick}>
             <div className="product-card">
               <img src={this.props.product.picture}/>
             </div>
@@ -50,7 +50,7 @@ class ShopItem extends React.Component {
   renderProductCards = () => {
     return(
       _.map(this.state.products, (product) => 
-        <ProductCard product={product} id={product.id} history={this.props.history}/>      
+        <ProductCard product={product} product_id={product.product_id} history={this.props.history}/>      
       )
     )
   }
