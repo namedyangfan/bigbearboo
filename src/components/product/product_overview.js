@@ -2,12 +2,21 @@ import React from 'react'
 import _ from 'lodash'
 import $ from 'jquery'
 import Dropdown from 'react-dropdown'
+import classNames from'classnames'
 
 export class VarianceTag extends React.Component {
+  handleClick = () => {
+    this.props.handleSelectVariance(this.props.attribute)
+  }
 
   render(){
+    const className = classNames({
+        'chip': true,
+        'teal lighten-2': this.props.selectedVarianceId == this.props.attribute.product_attribute_id
+    })
+
     return(
-      <div className='chip'>
+      <div className={className} onClick={this.handleClick}>
         {this.props.attribute.name}
       </div> 
     )
@@ -25,9 +34,9 @@ export default class ProductOverview extends React.Component {
   renderName = () => {
     return(
       <div>
-        <h6>
+        <h5>
           {this.props.product && this.props.product.name}
-        </h6>
+        </h5>
       </div>
     )
   }
@@ -35,9 +44,9 @@ export default class ProductOverview extends React.Component {
   renderPrice = () => {
     return(
       <div className='section'>
-        <h7>
+        <h6>
           CA${this.props.product && this.props.product.price}
-        </h7>
+        </h6>
       </div>
     )
   }
@@ -45,7 +54,8 @@ export default class ProductOverview extends React.Component {
   renderVariance = () => {
     return(
       _.map(this.props.product && this.props.product.attributes, (value) => 
-        <VarianceTag attribute={value}/>
+        <VarianceTag attribute={value} handleSelectVariance={this.props.handleSelectVariance}
+        selectedVarianceId={this.props.selectedVarianceId}/>
       )
     )
   }

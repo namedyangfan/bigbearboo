@@ -14,7 +14,7 @@ class ProductCard extends React.Component {
   render(){
     return(
         <div className="col s12 m6 l4">
-          <div className="card medium" onClick={this.handleOnClick}>
+          <div className="card large" onClick={this.handleOnClick}>
             <div className="product-card">
               <img src={this.props.product.picture}/>
             </div>

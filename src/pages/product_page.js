@@ -1,8 +1,24 @@
 import React from 'react'
+import _ from 'lodash'
 import * as HomeProductsApi from 'api/home_products'
 import ProductOverview from 'components/product/product_overview'
 
 var HtmlToReactParser = require('html-to-react').Parser;
+
+class ProductPicture extends React.Component {
+  render(){
+    console.log('ProductPicture: ' + this.props.pictureDisplay)
+    return(
+      <div className="col s12 m7 l8 ">
+        <div className="section">
+          <div className="card-image">
+            <img className="fit-card" src={this.props.pictureDisplay} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
 
 export default class ProductPage extends React.Component {
   constructor(props) {
@@ -17,26 +33,33 @@ export default class ProductPage extends React.Component {
     console.log('DIDMOUNT' + JSON.stringify(params))
     HomeProductsApi.show(params)
     .then((response) => {
-      console.log(response.data)
-      this.setState({
-        product: response.data
-      })
+      console.log(_.isEmpty(response.data.attributes))
+      if(_.isEmpty(response.data.attributes)){
+        this.setState({
+          product: response.data,
+          pictureDisplay: response.data.picture,
+        })
+      } else {
+        this.setState({
+          product: response.data,
+          pictureDisplay: _.head(response.data.attributes).picture,
+          selectedVarianceId: _.head(response.data.attributes).product_attribute_id
+        })
+      }
+
     })
     .catch((error) => {
-      console.log(error.response.data.errors)
+      console.log('ERROR:' + error.response)
     })
   }
 
-   renderProductPicture= () => {
-    return(
-      <div className="col s12 m7 l8 ">
-        <div className="section">
-          <div className="card-image">
-            <img className="fit-card" src={this.state.product && this.state.product.picture} />
-          </div>
-        </div>
-      </div>
-    )
+  handleSelectVariance = (variance) => {
+    if (variance.product_attribute_id != this.state.selectedVarianceId){
+      this.setState({
+        pictureDisplay: variance.picture,
+        selectedVarianceId: variance.product_attribute_id
+      })
+    }
   }
 
   renderProductDetail = () => {
@@ -57,8 +80,9 @@ export default class ProductPage extends React.Component {
     return(
       <div className="container product-page">
         <div className="row">
-          {this.renderProductPicture()}
-          <ProductOverview product={this.state.product}/>
+          <ProductPicture pictureDisplay={this.state.pictureDisplay}/>
+          <ProductOverview product={this.state.product} handleSelectVariance={this.handleSelectVariance}
+            selectedVarianceId={this.state.selectedVarianceId}/>
         </div>
         <div className="row">
           {this.renderProductDetail()}
