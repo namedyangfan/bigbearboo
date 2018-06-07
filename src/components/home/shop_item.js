@@ -57,7 +57,7 @@ class ShopItem extends React.Component {
 
   render() {
     return (
-      <div className="shop-item">
+      <div className="shop-item grey lighten-4">
         <div className="container">
           <div className="row">
             {this.renderProductCards()}
