@@ -68,10 +68,7 @@ class Header extends Component {
               <div className="Dropdown-menu">
                 <NavLink className="Dropdown-option" to="/admin"
                   activeClassName="is-selected">Admin</NavLink>
-                <NavLink className="Dropdown-option" to="/about"
-                  activeClassName="is-selected">about</NavLink>
-                <NavLink className="Dropdown-option" to="/contact"
-                  activeClassName="is-selected">Contact</NavLink>
+                <div className="Dropdown-option" onClick={this.logOutUser}>Logout</div>
               </div>
               )
             : (null)
@@ -92,7 +89,7 @@ class Header extends Component {
             {this.renderDropDown()}
           </li>
           <li>
-            <a className="waves-effect waves-light btn" onClick={this.logOutUser}>
+            <a className="waves-effect waves-light btn">
               <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
             </a>
           </li>
@@ -105,7 +102,7 @@ class Header extends Component {
         <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
         <li><NavLink to="/login" activeClassName="active">Login</NavLink></li>
         <li>
-          <a className="btn waves-effect waves-light" onClick={this.handleClick}>
+          <a className="btn waves-effect waves-light">
             <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
           </a>
         </li>
@@ -144,6 +141,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default withRouter(connect( mapStateToProps, mapDispatchToProps )( Header ));
-
-          // <Dropdown className = "dropdown-root-container" options={options} onChange={this.handleDropdownClick}
-          //   placeholder={_.capitalize(this.props.user_name)} />
