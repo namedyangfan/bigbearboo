@@ -48,14 +48,12 @@ export default class OrderItemsTable extends React.Component {
 
   renderRows = () => {
     if(this.props.order_items){
-      console.log('ORDERITEM IS DEFINED' + JSON.stringify(this.props.order_items))
       return(
         _.map(this.props.order_items, (row) => 
           <Row row={row} history={this.props.history}/>
         )
       )
     }else{
-      console.log('ORDERITEM IS NOT DEFINED' + this.props.order_items)
       return (<div></div>)
     }
   }

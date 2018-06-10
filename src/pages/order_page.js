@@ -25,7 +25,6 @@ class Order extends React.Component {
     }
     CartOrdersApi.show(params)
     .then((response) => {
-      console.log(response.data)
       this.setState(response.data)
     })
     .catch((error) => {

@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import _ from 'lodash'
 import * as HomeProductsApi from 'api/home_products'
-import {addItemNumber} from 'actions/current_user_item_numbers_actions'
+import {addItemNumber} from 'actions/cart'
 
 class ProductCard extends React.Component {
   handleOnClick = () => {
@@ -39,7 +39,6 @@ class ShopItem extends React.Component {
   componentDidMount(){
     HomeProductsApi.index()
     .then((response) => {
-      console.log(response.data)
       this.setState({products: response.data})
     })
     .catch((error) => {

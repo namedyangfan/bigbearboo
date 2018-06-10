@@ -2,7 +2,8 @@ import axios from 'axios'
 import React, { Component } from 'react';
 import { NavLink, Link, Redirect, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
-import * as actions from '.././actions/auth'
+import * as authActions from 'actions/auth'
+import * as cartActions from 'actions/cart'
 import _ from 'lodash'
 
 var classNames = require('classnames');
@@ -14,6 +15,10 @@ class Header extends Component {
     this.state = {
       dropDownIsSelected: false
     }
+  }
+
+  componentDidMount(){
+    this.props.getCart()
   }
 
   logOutUser = (e) => {
@@ -56,6 +61,11 @@ class Header extends Component {
     this.handleDropdownClick(e)
   }
 
+  openCurrentOrder = (e) => {
+    console.log('CURRENT ORDER')
+    this.props.history.push(`/order`)
+  }
+
   renderDropDown = () => {
     return(
       <div className="dropdown-root-container red accent-1" ref={node => { this.node = node}}>
@@ -89,8 +99,10 @@ class Header extends Component {
             {this.renderDropDown()}
           </li>
           <li>
-            <a className="waves-effect waves-light btn">
-              <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
+            <a className="waves-effect waves-light btn"  onClick={this.openCurrentOrder}>
+              <i className="material-icons left">
+                shopping_cart
+              </i> {this.props.numberItems}
             </a>
           </li>
         </ul>
@@ -111,7 +123,6 @@ class Header extends Component {
   }
 
   render() {
-    if (this.state.redirectMyOrders) { return (<Redirect to="/about" />) }
     return(
       <nav>
         <div className="header nav-wrapper">
@@ -130,13 +141,14 @@ const mapStateToProps = (state) => {
       user_name       : state.auth.user_name,
       user_id         : state.auth.user_id,
       isAuthenticated : state.auth.isAuthenticated,
-      numberItems     : state.numberItems
+      numberItems     : state.itemNumber.numberItems
   }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogOut: () => dispatch( actions.authLogOut())
+        onLogOut: () => dispatch(authActions.authLogOut()),
+        getCart: () => dispatch(cartActions.getCart())
     }
 }
 
