@@ -44,6 +44,7 @@ export const getCartFail = (error) => {
 }
 
 export const getCart = () => {
+  console.log('GETCART dispatch')
   return dispatch => {
     dispatch(getCartStart())
 

@@ -17,10 +17,6 @@ class Header extends Component {
     }
   }
 
-  componentDidMount(){
-    this.props.getCart()
-  }
-
   logOutUser = (e) => {
     // delete token from the backend
     document.removeEventListener('click', this.handleOutsideClick, false)
@@ -113,11 +109,6 @@ class Header extends Component {
       <ul id="nav-mobile" className="right">
         <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
         <li><NavLink to="/login" activeClassName="active">Login</NavLink></li>
-        <li>
-          <a className="btn waves-effect waves-light">
-            <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
-          </a>
-        </li>
       </ul>
     )
   }
@@ -148,7 +139,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         onLogOut: () => dispatch(authActions.authLogOut()),
-        getCart: () => dispatch(cartActions.getCart())
     }
 }
 
