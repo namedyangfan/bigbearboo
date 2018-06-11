@@ -30,10 +30,8 @@ export default class ProductPage extends React.Component {
 
   componentDidMount(){
     const params = {product_id: this.props.match.params.id}
-    console.log('DIDMOUNT' + JSON.stringify(params))
     HomeProductsApi.show(params)
     .then((response) => {
-      console.log(_.isEmpty(response.data.attributes))
       if(_.isEmpty(response.data.attributes)){
         this.setState({
           product: response.data,

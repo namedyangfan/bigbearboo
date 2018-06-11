@@ -1,9 +1,7 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import {connect} from 'react-redux';
 import _ from 'lodash'
 import * as HomeProductsApi from 'api/home_products'
-import {addItemNumber} from 'actions/cart'
 
 class ProductCard extends React.Component {
   handleOnClick = () => {
@@ -27,7 +25,7 @@ class ProductCard extends React.Component {
   }
 }
 
-class ShopItem extends React.Component {
+export default class ShopItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,19 +64,3 @@ class ShopItem extends React.Component {
       );
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-      numberItems: state.numberItems,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addItemNumber: (number) => {
-            dispatch(addItemNumber(number));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShopItem)

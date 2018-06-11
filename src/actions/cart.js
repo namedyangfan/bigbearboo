@@ -1,25 +1,46 @@
 import * as actionTypes from 'actions/actionTypes'
 import * as CartOrdersApi from 'api/cart_orders'
+import * as CartOrderItemsApi from 'api/cart_order_items'
+import _ from 'lodash'
 
-export const addItemNumberSuccess = (number) => {
-  return {
-    type    : actionTypes.ADD_ITEM_NUMBER_SUCCESS,
-    payload : number
+export const addItemStart = () => {
+  return{
+    type: actionTypes.ADD_ITEM_START,
   }
 }
 
-export const addItemNumber = (number) => {
-  return (dispatch) => {
-    setTimeout( () => {
-    dispatch(addItemNumberSuccess(number))
-    }, 2000)
+export const addItemSuccess = (numberItems) => {
+  return{
+    type: actionTypes.ADD_ITEM_SUCCESS,
+    numberItems : numberItems
   }
 }
 
-export const currentUseItemNumberSubtract = (number) =>{
-  return {
-    type    : actionTypes.SUBTRACT_ITEM_NUMBER_SUCCESS,
-    payload : number
+export const addItemFail = (error) => {
+  return{
+    type: actionTypes.ADD_ITEM_FAIL,
+    error: error.response.data.error
+  }
+}
+
+export const addItem = (itemParams) => {
+  return dispatch => {
+    dispatch(addItemStart())
+
+    const authParams = {
+      user_id : localStorage.getItem('user_id'),
+      token   : localStorage.getItem('token')
+    }
+
+    const params = _.assign({}, itemParams, authParams)
+    console.log('ADDITEM PARAM:' + JSON.stringify(params))
+    CartOrderItemsApi.post(params)
+    .then( response => {
+      dispatch(addItemSuccess(response.data.length))
+    })
+    .catch((error) => {
+      dispatch(addItemFail(error))
+    })
   }
 }
 

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { NavLink, Link, Redirect, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 import * as authActions from 'actions/auth'
-import * as cartActions from 'actions/cart'
 import _ from 'lodash'
 
 var classNames = require('classnames');
@@ -84,8 +83,6 @@ class Header extends Component {
   }
 
   renderNavigationItems() {
-    let options = ['My Profile', 'My Orders', 'Logout']
-
     if(this.props.isAuthenticated){
       return(
       <div>
