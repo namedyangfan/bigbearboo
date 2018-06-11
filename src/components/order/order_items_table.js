@@ -6,14 +6,16 @@ import classNames from'classnames'
 
 export class Row extends React.Component {
   renderPicture = () => {
-    
+    const pictureURL = this.props.row.product_attributes.picture ||this.props.row.product_picture 
+
     return(
       <td className='row'>
         <div className='col'>
-          <img className="materialboxed" width="100" src={this.props.row.product_picture} />
+          <img className="materialboxed" width="100" src={pictureURL} />
         </div>
         <div className='col s5'>
           <div className='item-name'> {this.props.row.product_name} </div>
+          <div className='item-name'> {this.props.row.product_attributes.name} </div>
           <div className='section item-details'>
             Item Price: ${this.props.row.unit_price}
           </div>
