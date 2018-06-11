@@ -51,8 +51,29 @@ const addItemFail = (state, action) => {
   })
 }
 
-const currentUserItemNumberReducer = (state = initialState, action) => {
+const removeItemStart = (state, action) => {
+  return _.assign({}, state, {
+    error           : null,
+    loading         : true,
+  })
+}
 
+const removeItemSuccess = (state, action) => {
+  return _.assign({}, state, {
+    error       : null,
+    loading     : false,
+    numberItems : action.numberItems
+  })
+}
+
+const removeItemFail = (state, action) => {
+  return _.assign({}, state, {
+    error       : action.error,
+    loading     : false,
+  })
+}
+
+const currentUserItemNumberReducer = (state = initialState, action) => {
     switch (action.type){
       case actionTypes.GET_CART_START: return getCartStart(state, action)
       case actionTypes.GET_CART_SUCCESS: return getCartSuccess(state, action)
@@ -60,6 +81,9 @@ const currentUserItemNumberReducer = (state = initialState, action) => {
       case actionTypes.ADD_ITEM_START: return addItemStart(state, action)
       case actionTypes.ADD_ITEM_SUCCESS: return addItemSuccess(state, action)
       case actionTypes.ADD_ITEM_FAIL: return addItemFail(state, action)
+      case actionTypes.REMOVE_ITEM_START: return addItemStart(state, action)
+      case actionTypes.REMOVE_ITEM_SUCCESS: return addItemSuccess(state, action)
+      case actionTypes.REMOVE_ITEM_FAIL: return addItemFail(state, action)
 
       default:
         return state

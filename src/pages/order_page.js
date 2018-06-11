@@ -15,36 +15,62 @@ class Order extends React.Component {
     super(props);
     this.state = {
       token: localStorage.getItem('token'),
-      user_id: localStorage.getItem('user_id')
+      user_id: localStorage.getItem('user_id'),
+      needRefresh: false,
+      loading: true,
     };
   }
   componentDidMount(){
-    const params = {
-      user_id: this.state.user_id,
-      token: this.state.token
+    this.getCurrentOrder()
+  }
+
+  componentDidUpdate(prevProps,prevState){
+    if(this.state.needRefresh && !this.state.loading){
+      console.log('REFRESH DATA &&&&')
+      this.getCurrentOrder()
     }
+  }
+
+  setNeedRefresh = () =>{
+    this.setState({needRefresh:true})
+  }
+
+  getCurrentOrder(){
+    const params = {
+      user_id : this.state.user_id,
+      token   : this.state.token
+    }
+
+    this.setState({loading: true})
+
     CartOrdersApi.show(params)
     .then((response) => {
-      this.setState(response.data)
+      console.log('CARTSHOW' + JSON.stringify(response.data))
+      this.setState(response.data, ()=>{ this.setState({loading:false})})
     })
     .catch((error) => {
-      console.log(error.response.data.errors)
+      console.log(JSON.stringify(error))
+    })
+    .then(()=> {
+      this.setState({
+        needRefresh : false,
+      })
     })
   }
 
   render(){
-    const stateParams = _.assign({}, this.state)
     return(
       <div className="order-page">
         <div className="container">
           <div className="row">
             <div className="col s12 m8">
-              <OrderItemsTable order_items={stateParams.order_items}/>
+              <OrderItemsTable order_items={this.state.order_items} setNeedRefresh={this.setNeedRefresh} 
+                loading={this.state.loading}/>
             </div>
             <div className="col s12 m4">
               <div className="card-panel grey lighten-4">
-                <CheckOutContainer subtotal={stateParams.subtotal} tax={stateParams.tax} 
-                  shipping={stateParams.shipping} total={stateParams.total}/>
+                <CheckOutContainer subtotal={this.state.subtotal} tax={this.state.tax} 
+                  shipping={this.state.shipping} total={this.state.total} loading={this.state.loading}/>
               </div>
             </div>
           </div>
