@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import * as CartActions from 'actions/cart'
 
 export const authStart = () => {
   return{
@@ -44,6 +45,7 @@ export const auth = (email, password) => {
       dispatch(authSuccess(response.data.user_id,
                            response.data.user_name
                            ))
+      dispatch(CartActions.getCart())
     })
     .catch( error => {
       dispatch(authFail(error))
@@ -75,6 +77,7 @@ export const authValidateToken = () => {
           dispatch(authSuccess(response.data.user_id,
                                response.data.user_name
                               ))
+          dispatch(CartActions.getCart())
         })
         .catch( error => {
           console.log("authValidateToken faild")

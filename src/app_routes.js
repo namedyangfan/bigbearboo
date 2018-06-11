@@ -11,6 +11,7 @@ import LoginPage from './pages/login_page'
 import RegisterPage from './pages/register_page'
 import AdminPage from './pages/admin_page'
 import AdminProductPage from './pages/admin_product_page'
+import Order from 'pages/order_page'
 
 var fakeAuth = {isAuthenticated : false}
 
@@ -39,6 +40,7 @@ class App_routes extends React.Component {
           <Route path="/contact" component={Contact}/>
           <Route path="/login" component={LoginPage}/>
           <Route path="/register" component={RegisterPage}/>
+          <Route path="/order" component={Order}/>
           <Route exact path="/admin" component={AdminPage}/>
           <Route path="/admin/product/:id" component={AdminProductPage}/>
           <Redirect to="/" />

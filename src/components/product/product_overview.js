@@ -3,8 +3,10 @@ import _ from 'lodash'
 import $ from 'jquery'
 import Dropdown from 'react-dropdown'
 import classNames from'classnames'
+import {connect} from 'react-redux';
+import {addItem} from 'actions/cart'
 
-export class VarianceTag extends React.Component {
+class VarianceTag extends React.Component {
   handleClick = () => {
     this.props.handleSelectVariance(this.props.attribute)
   }
@@ -23,12 +25,26 @@ export class VarianceTag extends React.Component {
   }
 }
 
-export default class ProductOverview extends React.Component {
+class ProductOverview extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      id: '',
+      quantity: '1',
     }
+  }
+
+  handleAddItem = () => {
+    const itemParams = {
+      product_id: this.props.product.product_id,
+      quantity: this.state.quantity,
+      product_attribute_id: this.props.selectedVarianceId
+    }
+
+    this.props.addItem(itemParams)
+  }
+
+  handleSelectQuantity = (quantity) =>{
+    this.setState({quantity: quantity.value})
   }
 
   renderName = () => {
@@ -63,12 +79,11 @@ export default class ProductOverview extends React.Component {
   renderQuantity = () => {
     const options = [ '1', '2', '3', '4','5']
 
-    const defaultOption = options[0]
     return(
       <div className="row">
         <div className="col s5 m5 l3">
           Quantity
-          <Dropdown options={options} onChange={this._onSelect} value={defaultOption} 
+          <Dropdown options={options} onChange={this.handleSelectQuantity} value={this.state.quantity} 
             placeholder="Select an option"/>
         </div>
       </div>
@@ -78,7 +93,9 @@ export default class ProductOverview extends React.Component {
   renderAddtoCartButton = () => {
     return(
       <div>
-        <a className="waves-effect waves-light btn col s12">Add to cart</a>
+        <a className="waves-effect waves-light btn col s12" onClick={this.handleAddItem}>
+          Add to cart
+        </a>
       </div>
     )
   }
@@ -108,3 +125,17 @@ export default class ProductOverview extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+      numberItems: state.numberItems,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItem: (itemParams) => { dispatch(addItem(itemParams)) }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductOverview)

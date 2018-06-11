@@ -76,7 +76,7 @@ export default class AdminPage extends React.Component {
   renderProductsTable = () => {
     return(
       <div className="row">
-        <div className="col s10 m10 l10 card-panel offset-s1 offset-m1 offset-l1">
+        <div className="col s12 card-panel">
           <table className="highlight">
             <thead>
               <tr>
@@ -94,9 +94,11 @@ export default class AdminPage extends React.Component {
 
   render(){
     return(
-      <div>
+      <div className = "grey lighten-4">
         <div className="container"> 
-          <CreateProductModal getProducts={this.getProducts}/>
+          <div className='row card-panel'>
+            <CreateProductModal getProducts={this.getProducts}/>
+          </div>
           {this.renderProductsTable()}
         </div>
       </div>

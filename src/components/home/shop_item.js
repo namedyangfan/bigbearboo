@@ -1,9 +1,7 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import {connect} from 'react-redux';
 import _ from 'lodash'
 import * as HomeProductsApi from 'api/home_products'
-import {addItemNumber} from 'actions/current_user_item_numbers_actions'
 
 class ProductCard extends React.Component {
   handleOnClick = () => {
@@ -27,7 +25,7 @@ class ProductCard extends React.Component {
   }
 }
 
-class ShopItem extends React.Component {
+export default class ShopItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,7 +37,6 @@ class ShopItem extends React.Component {
   componentDidMount(){
     HomeProductsApi.index()
     .then((response) => {
-      console.log(response.data)
       this.setState({products: response.data})
     })
     .catch((error) => {
@@ -57,7 +54,7 @@ class ShopItem extends React.Component {
 
   render() {
     return (
-      <div className="shop-item">
+      <div className="shop-item grey lighten-4">
         <div className="container">
           <div className="row">
             {this.renderProductCards()}
@@ -67,19 +64,3 @@ class ShopItem extends React.Component {
       );
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-      numberItems: state.numberItems,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addItemNumber: (number) => {
-            dispatch(addItemNumber(number));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShopItem)

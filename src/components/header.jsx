@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react';
 import { NavLink, Link, Redirect, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
-import * as actions from '.././actions/auth'
+import * as authActions from 'actions/auth'
 import _ from 'lodash'
 
 var classNames = require('classnames');
@@ -56,6 +56,11 @@ class Header extends Component {
     this.handleDropdownClick(e)
   }
 
+  openCurrentOrder = (e) => {
+    console.log('CURRENT ORDER')
+    this.props.history.push(`/order`)
+  }
+
   renderDropDown = () => {
     return(
       <div className="dropdown-root-container red accent-1" ref={node => { this.node = node}}>
@@ -68,10 +73,7 @@ class Header extends Component {
               <div className="Dropdown-menu">
                 <NavLink className="Dropdown-option" to="/admin"
                   activeClassName="is-selected">Admin</NavLink>
-                <NavLink className="Dropdown-option" to="/about"
-                  activeClassName="is-selected">about</NavLink>
-                <NavLink className="Dropdown-option" to="/contact"
-                  activeClassName="is-selected">Contact</NavLink>
+                <div className="Dropdown-option" onClick={this.logOutUser}>Logout</div>
               </div>
               )
             : (null)
@@ -81,8 +83,6 @@ class Header extends Component {
   }
 
   renderNavigationItems() {
-    let options = ['My Profile', 'My Orders', 'Logout']
-
     if(this.props.isAuthenticated){
       return(
       <div>
@@ -92,8 +92,10 @@ class Header extends Component {
             {this.renderDropDown()}
           </li>
           <li>
-            <a className="waves-effect waves-light btn" onClick={this.logOutUser}>
-              <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
+            <a className="waves-effect waves-light btn"  onClick={this.openCurrentOrder}>
+              <i className="material-icons left">
+                shopping_cart
+              </i> {this.props.numberItems}
             </a>
           </li>
         </ul>
@@ -104,17 +106,11 @@ class Header extends Component {
       <ul id="nav-mobile" className="right">
         <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
         <li><NavLink to="/login" activeClassName="active">Login</NavLink></li>
-        <li>
-          <a className="btn waves-effect waves-light" onClick={this.handleClick}>
-            <i className="material-icons left">shopping_cart</i> {this.props.numberItems}
-          </a>
-        </li>
       </ul>
     )
   }
 
   render() {
-    if (this.state.redirectMyOrders) { return (<Redirect to="/about" />) }
     return(
       <nav>
         <div className="header nav-wrapper">
@@ -133,17 +129,14 @@ const mapStateToProps = (state) => {
       user_name       : state.auth.user_name,
       user_id         : state.auth.user_id,
       isAuthenticated : state.auth.isAuthenticated,
-      numberItems     : state.numberItems
+      numberItems     : state.itemNumber.numberItems
   }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogOut: () => dispatch( actions.authLogOut())
+        onLogOut: () => dispatch(authActions.authLogOut()),
     }
 }
 
 export default withRouter(connect( mapStateToProps, mapDispatchToProps )( Header ));
-
-          // <Dropdown className = "dropdown-root-container" options={options} onChange={this.handleDropdownClick}
-          //   placeholder={_.capitalize(this.props.user_name)} />

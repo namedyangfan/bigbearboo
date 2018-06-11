@@ -35,13 +35,12 @@ export default class CreateProductModal extends React.Component {
   render(){
     return(
       <Modal header='Modal Header' id='foo'
-        trigger={      
-          <div className="section">
-            <Button className="right" waves='light' onClick={this.createProduct}>
-              product
-              <Icon right>add</Icon><
-            /Button>
-          </div>} 
+        trigger={
+          <Button className="right" waves='light' onClick={this.createProduct}>
+            product
+            <Icon right>add</Icon><
+          /Button>
+        } 
         actions={this.renderSaveButton()}>
 
         <div className="row">
