@@ -6,7 +6,7 @@ import classNames from'classnames'
 
 export class Row extends React.Component {
   renderPicture = () => {
-    const pictureURL = this.props.row.product_attributes.picture ||this.props.row.product_picture 
+    const pictureURL = this.props.row.product_attributes.picture ||this.props.row.product_picture
 
     return(
       <td className='row'>

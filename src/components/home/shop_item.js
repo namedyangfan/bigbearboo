@@ -3,15 +3,14 @@ import { NavLink, Link } from 'react-router-dom'
 import _ from 'lodash'
 import * as HomeProductsApi from 'api/home_products'
 
-class ProductCard extends React.Component {
+class ItemCard extends React.Component {
   handleOnClick = () => {
-    console.log('PRODUCTCARD ONCLICK')
     this.props.history.push(`/product/${this.props.product_id}`)
   }
 
   render(){
     return(
-        <div className="col s12 m6 l4">
+        <div className="col s12 m6 l4 item-card">
           <div className="card large" onClick={this.handleOnClick}>
             <div className="product-card">
               <img src={this.props.product.picture}/>
@@ -44,10 +43,10 @@ export default class ShopItem extends React.Component {
     })
   }
 
-  renderProductCards = () => {
+  renderItemCards = () => {
     return(
       _.map(this.state.products, (product) => 
-        <ProductCard product={product} product_id={product.product_id} history={this.props.history}/>      
+        <ItemCard product={product} product_id={product.product_id} history={this.props.history}/>      
       )
     )
   }
@@ -57,7 +56,7 @@ export default class ShopItem extends React.Component {
       <div className="shop-item grey lighten-4">
         <div className="container">
           <div className="row">
-            {this.renderProductCards()}
+            {this.renderItemCards()}
           </div>
         </div>
       </div>

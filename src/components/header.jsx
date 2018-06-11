@@ -63,9 +63,10 @@ class Header extends Component {
 
   renderDropDown = () => {
     return(
-      <div className="dropdown-root-container red accent-1" ref={node => { this.node = node}}>
+      <div className="dropdown-root-container" ref={node => { this.node = node}}>
         <div className="Dropdown-control" onClick={this.handleDropdownClick}>
-          {_.capitalize(this.props.user_name)}
+          <i class="material-icons left">account_circle</i>{_.capitalize(this.props.user_name)}
+          <i className="material-icons right"> arrow_drop_down </i>
         </div>
         {
           this.state.dropDownIsSelected
@@ -73,7 +74,8 @@ class Header extends Component {
               <div className="Dropdown-menu">
                 <NavLink className="Dropdown-option" to="/admin"
                   activeClassName="is-selected">Admin</NavLink>
-                <div className="Dropdown-option" onClick={this.logOutUser}>Logout</div>
+                <div className="divider"></div>
+                <a className="Dropdown-option" onClick={this.logOutUser}>Logout</a>
               </div>
               )
             : (null)
@@ -87,7 +89,12 @@ class Header extends Component {
       return(
       <div>
         <ul id="nav-mobile" className="right">
-          <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
+          <li>
+            <NavLink exact to="/" activeClassName="active">
+              <i className="material-icons left">home</i>
+              Home
+            </NavLink>
+          </li>
           <li>
             {this.renderDropDown()}
           </li>
