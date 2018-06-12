@@ -10,6 +10,11 @@ import {removeItem} from 'actions/cart'
 import LoadingState from 'share/loading_state'
 
 class Row extends React.Component {
+  componentDidMount(){
+    $(document).ready(function(){
+      $('.materialboxed').materialbox();
+    });
+  }
   handleRemoveItem = () => {
     const itemParams = {
       order_item_id: this.props.row.order_item_id

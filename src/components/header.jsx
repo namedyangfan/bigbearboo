@@ -56,6 +56,10 @@ class Header extends Component {
     this.handleDropdownClick(e)
   }
 
+  handleClickCatagory = (e) => {
+    console.log(e)
+  }
+
   openCurrentOrder = (e) => {
     console.log('CURRENT ORDER')
     this.props.history.push(`/order`)
@@ -90,9 +94,8 @@ class Header extends Component {
       <div>
         <ul id="nav-mobile" className="right">
           <li>
-            <NavLink exact to="/" activeClassName="active">
-              <i className="material-icons left">home</i>
-              Home
+            <NavLink exact to="/">
+              <i className="material-icons left">home</i>Home
             </NavLink>
           </li>
           <li>
@@ -111,21 +114,40 @@ class Header extends Component {
     }
     return(
       <ul id="nav-mobile" className="right">
-        <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
-        <li><NavLink to="/login" activeClassName="active">Login</NavLink></li>
+        <li><NavLink exact to="/">Home</NavLink></li>
+        <li><NavLink to="/login">Login</NavLink></li>
       </ul>
+    )
+  }
+
+  renderCategoryTabs(){
+    return(
+      <div className="nav-content pink lighten-1">
+        <div className="tabs tabs-transparent row">
+          <div className="tab col offset-m1 offset-l4">
+            <NavLink to="/admin">BRIDES</NavLink>
+          </div>
+          <div className="tab">
+            <NavLink to="/admin">BRIDESMAIDS</NavLink>
+          </div>
+          <div className="tab">
+            <NavLink to="/admin">ACCESSORIES</NavLink>
+          </div>
+        </div>
+      </div>
     )
   }
 
   render() {
     return(
-      <nav>
+      <nav className="nav-extended">
         <div className="header nav-wrapper">
           <div className="container">
             <NavLink className="brand-logo left" to="/home">Logo</NavLink>
           </div>
           {this.renderNavigationItems()}
         </div>
+        {this.renderCategoryTabs()}
       </nav>
     )
   }
