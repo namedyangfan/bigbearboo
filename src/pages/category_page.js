@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import _ from 'lodash'
 import * as HomeProductsApi from 'api/home_products'
+import HomePageLayout from 'layouts/home_page_layout'
 
 class ItemCard extends React.Component {
   handleOnClick = () => {
@@ -24,16 +25,27 @@ class ItemCard extends React.Component {
   }
 }
 
-export default class ShopItem extends React.Component {
+export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products    : null,
     };
   }
 
   componentDidMount(){
-    HomeProductsApi.index()
+    this.getProducts(this.props.match.params.id)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.id != this.props.match.params.id ){
+      this.getProducts(nextProps.match.params.id)
+    }
+  }
+
+  getProducts = (id) => {
+    const params = { category_id: id }
+
+    HomeProductsApi.indexCategory(params)
     .then((response) => {
       this.setState({products: response.data})
     })

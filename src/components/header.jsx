@@ -125,13 +125,13 @@ class Header extends Component {
       <div className="nav-content pink lighten-1">
         <div className="tabs tabs-transparent row">
           <div className="tab col offset-m1 offset-l4">
-            <NavLink to="/admin">BRIDES</NavLink>
+            <NavLink to="/category/1">BRIDES</NavLink>
           </div>
           <div className="tab">
-            <NavLink to="/admin">BRIDESMAIDS</NavLink>
+            <NavLink to="/category/2">BRIDESMAIDS</NavLink>
           </div>
           <div className="tab">
-            <NavLink to="/admin">ACCESSORIES</NavLink>
+            <NavLink to="/category/3">ACCESSORIES</NavLink>
           </div>
         </div>
       </div>
