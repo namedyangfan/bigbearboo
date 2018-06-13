@@ -17,7 +17,7 @@ export class Row extends React.Component {
 
   renderCell = (value, key) => {
     if (key == 'picture'){
-      return <td><img className="materialboxed" width="150" src={value} /></td>
+      return <td><img className="materialboxed" width="50" src={value} /></td>
     }
     else{
       return <td>{value}</td>

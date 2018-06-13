@@ -47,17 +47,7 @@ export default class AdminProduct extends React.Component {
     })
   }
 
-  updateProduct = (e) => {
-    const { id, value } = e.target
-    this.setState({ [id]: value })
-  }
-
-  updateDetail = (e) => {
-    console.log("UPDATEDETAIL")
-    this.setState({ detail: e })
-  } 
-
-  handleSubmit = (e) => {
+  saveProduct = _.debounce(() => {
     const stateParams = _.assign({}, this.state)
     const params = {
       product_id  : stateParams.product_id,
@@ -78,6 +68,19 @@ export default class AdminProduct extends React.Component {
     .catch((error) => {
       console.log(error.response.data.errors)
     })
+  }, 1000)
+
+  updateProduct = (e) => {
+    const { id, value } = e.target
+    this.setState({ [id]: value }, ()=>{this.saveProduct()})
+  }
+
+  updateDetail = (e) => {
+    this.setState({ detail: e }, ()=>{this.saveProduct()})
+  } 
+
+  handleSubmit = () => {
+    this.saveProduct()
   }
 
   renderTitle = () => {
