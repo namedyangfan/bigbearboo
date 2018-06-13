@@ -48,7 +48,12 @@ export default class AdminPage extends React.Component {
   }
 
   getProducts = () => {
-    AdminProductsApi.index()
+    const params = {
+      user_id: localStorage.getItem('user_id'),
+      token: localStorage.getItem('token')
+    }
+
+    AdminProductsApi.index(params)
     .then((response) => {
       console.log(response.data)
       this.setState({ 

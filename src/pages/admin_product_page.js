@@ -30,7 +30,11 @@ export default class AdminProduct extends React.Component {
   }
 
   getProducts = () => {
-    const params = {product_id: this.props.match.params.id}
+    const params = {
+      product_id: this.props.match.params.id,
+      user_id: localStorage.getItem('user_id'),
+      token: localStorage.getItem('token')
+    }
     
     AdminProductsApi.show(params)
     .then((response) => {
@@ -62,7 +66,9 @@ export default class AdminProduct extends React.Component {
       description : stateParams.description,
       detail      : stateParams.detail,
       catagory    : stateParams.catagory,
-      picture     : stateParams.picture
+      picture     : stateParams.picture,
+      user_id     : localStorage.getItem('user_id'),
+      token       : localStorage.getItem('token')
     }
 
     AdminProductsApi.patch(params)
