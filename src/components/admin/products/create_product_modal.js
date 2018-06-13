@@ -27,7 +27,7 @@ export default class CreateProductModal extends React.Component {
     AdminProductsApi.post(params)
     .then((response) => {
       console.log(response.data)
-      this.props.getProducts()
+      this.props.history.push(`/admin/product/${response.data.id}`)
     })
     .catch((error) => {
       console.log(error.response.data.errors)

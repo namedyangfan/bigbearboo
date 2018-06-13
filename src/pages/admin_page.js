@@ -97,7 +97,7 @@ export default class AdminPage extends React.Component {
       <div className = "grey lighten-4">
         <div className="container"> 
           <div className='row card-panel'>
-            <CreateProductModal getProducts={this.getProducts}/>
+            <CreateProductModal getProducts={this.getProducts} history={this.props.history}/>
           </div>
           {this.renderProductsTable()}
         </div>

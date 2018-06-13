@@ -10,13 +10,10 @@ class ItemCard extends React.Component {
 
   render(){
     return(
-        <div className="col s12 m6 l4 item-card">
-          <div className="card large" onClick={this.handleOnClick}>
+        <div className="col s12 m4 l3 item-card">
+          <div className="card medium" onClick={this.handleOnClick}>
             <div className="product-card">
               <img src={this.props.product.picture}/>
-            </div>
-            <div className="card-content">
-              <span>{this.props.product.name}</span>
             </div>
           </div>
         </div>

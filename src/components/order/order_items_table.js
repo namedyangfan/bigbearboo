@@ -37,8 +37,8 @@ class Row extends React.Component {
             <div className='section item-details'>
               Item Price: ${this.props.row.unit_price}
             </div>
-            <div onClick={this.handleRemoveItem}>
-              <i className="material-icons">remove_shopping_cart</i>
+            <div className='remove-action' onClick={this.handleRemoveItem}>
+              <span className='item-details'>REMOVE</span>
             </div>
         </div>
       </td>
