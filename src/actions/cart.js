@@ -3,6 +3,47 @@ import * as CartOrdersApi from 'api/cart_orders'
 import * as CartOrderItemsApi from 'api/cart_order_items'
 import _ from 'lodash'
 
+export const removeItemStart = () => {
+  return{
+    type: actionTypes.REMOVE_ITEM_START,
+  }
+}
+
+export const removeItemSuccess = (numberItems) => {
+  return{
+    type: actionTypes.REMOVE_ITEM_SUCCESS,
+    numberItems : numberItems
+  }
+}
+
+export const removeItemFail = (error) => {
+  return{
+    type: actionTypes.REMOVE_ITEM_FAIL,
+    error: error.response.data.error
+  }
+}
+
+export const removeItem = (itemParams) => {
+  return dispatch => {
+    dispatch(addItemStart())
+
+    const authParams = {
+      user_id : localStorage.getItem('user_id'),
+      token   : localStorage.getItem('token')
+    }
+
+    const params = _.assign({}, itemParams, authParams)
+    console.log('REMOVEITEM PARAM:' + JSON.stringify(params))
+    CartOrderItemsApi.destroy(params)
+    .then( response => {
+      dispatch(removeItemSuccess(response.data.length))
+    })
+    .catch((error) => {
+      dispatch(removeItemFail(error))
+    })
+  }
+}
+
 export const addItemStart = () => {
   return{
     type: actionTypes.ADD_ITEM_START,
