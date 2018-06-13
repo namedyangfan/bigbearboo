@@ -28,6 +28,7 @@ class Header extends Component {
     })
     .then((response) => {
       console.log(response)
+      this.props.history.push(`/home`)
     })
     .catch((error) => {
       console.log(error.response.data.errors)
