@@ -10,6 +10,8 @@ import store from "./store";
 import $ from 'jquery';
 import * as _ from 'lodash';
 import 'react-dropdown/style.css'
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 window.jQuery = window.$ = $;
 window._ = window.$ = $;
