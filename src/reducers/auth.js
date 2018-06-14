@@ -6,7 +6,9 @@ const initialState = {
   user_id         : null,
   isAuthenticated : false,
   error           : null,
-  loading         : false
+  loading         : false,
+  role            : null,
+  isAdmin         : null
 }
 
 const authStart = (state, action) => {
@@ -21,6 +23,8 @@ const authSuccess = (state, action) => {
   return _.assign({}, state, {
     user_id         : action.user_id,
     user_name       : action.user_name,
+    role            : action.role,
+    isAdmin         : action.role === 'admin',
     error           : null,
     loading         : false,
     isAuthenticated : true

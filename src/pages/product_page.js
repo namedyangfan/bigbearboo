@@ -29,7 +29,7 @@ export default class ProductPage extends React.Component {
   }
 
   componentDidMount(){
-    const params = {product_id: this.props.match.params.id}
+    const params = { product_id: this.props.match.params.id }
     HomeProductsApi.show(params)
     .then((response) => {
       if(_.isEmpty(response.data.attributes)){

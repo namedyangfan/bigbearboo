@@ -19,7 +19,9 @@ export default class CreateProductModal extends React.Component {
   }
 
   createProduct = (e) => {
-    let params = {
+    const params = {
+      user_id     : localStorage.getItem('user_id'),
+      token       : localStorage.getItem('token'),
       name        : this.state.name,
       category_id : this.state.category.value
     }

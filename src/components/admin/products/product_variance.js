@@ -28,6 +28,8 @@ export class Row extends React.Component {
       name: this.state.name,
       picture: this.state.picture,
       quantity_owned: this.state.quantity_owned,
+      user_id: localStorage.getItem('user_id'),
+      token: localStorage.getItem('token')
     }
 
     AdminProductAttributesApi.patch(params)
@@ -148,7 +150,9 @@ export default class ProductVariance extends React.Component {
   handleAddVariance = _.debounce(() => {
     const params = {
       product_id: this.props.product_id,
-      quantity_owned: 0
+      quantity_owned: 0,
+      user_id: localStorage.getItem('user_id'),
+      token: localStorage.getItem('token')
     }
 
     AdminProductAttributesApi.post(params)    
