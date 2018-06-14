@@ -158,6 +158,7 @@ const mapStateToProps = (state) => {
   return {
       user_name       : state.auth.user_name,
       user_id         : state.auth.user_id,
+      role            : state.auth.role,
       isAuthenticated : state.auth.isAuthenticated,
       numberItems     : state.itemNumber.numberItems
   }

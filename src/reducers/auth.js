@@ -7,7 +7,7 @@ const initialState = {
   isAuthenticated : false,
   error           : null,
   loading         : false,
-  role           : null
+  role            : null
 }
 
 const authStart = (state, action) => {

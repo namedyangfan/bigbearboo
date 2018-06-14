@@ -8,11 +8,12 @@ export const authStart = () => {
   }
 }
 
-export const authSuccess = (user_id, user_name) => {
+export const authSuccess = (user_id, user_name, role) => {
   return{
     type      : actionTypes.AUTH_SUCCESS,
     user_id   : user_id,
-    user_name : user_name
+    user_name : user_name,
+    role      : role
   }
 }
 
@@ -43,7 +44,8 @@ export const auth = (email, password) => {
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('user_id', response.data.user_id)
       dispatch(authSuccess(response.data.user_id,
-                           response.data.user_name
+                           response.data.user_name,
+                           response.data.role
                            ))
       dispatch(CartActions.getCart())
     })
@@ -75,7 +77,8 @@ export const authValidateToken = () => {
         .then( response => {
           console.log("authValidateToken success")
           dispatch(authSuccess(response.data.user_id,
-                               response.data.user_name
+                               response.data.user_name,
+                               response.data.role
                               ))
           dispatch(CartActions.getCart())
         })

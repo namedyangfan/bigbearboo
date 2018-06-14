@@ -14,14 +14,25 @@ import AdminProductPage from './pages/admin_product_page'
 import Order from 'pages/order_page'
 import Category from 'pages/category_page'
 
-var fakeAuth = {isAuthenticated : false}
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={(props) => (
-    fakeAuth.isAuthenticated === true
+const PrivateRoute = ({ component: Component, isAuthenticated,...rest }) => (
+  <Route {...rest}
+    render={(props) => (
+    isAuthenticated === true
       ? <Component {...props} />
       : <Redirect to={{
           pathname : '/login',
+          state    : { from: props.location }
+        }} />
+  )} />
+)
+
+const PrivateAdminRoute = ({ component: Component, role,...rest }) => (
+  <Route {...rest}
+    render={(props) => (
+    role === 'admin'
+      ? <Component {...props} />
+      : <Redirect to={{
+          pathname : '/',
           state    : { from: props.location }
         }} />
   )} />
@@ -42,9 +53,9 @@ class App_routes extends React.Component {
           <Route path="/contact" component={Contact}/>
           <Route path="/login" component={LoginPage}/>
           <Route path="/register" component={RegisterPage}/>
-          <Route path="/order" component={Order}/>
-          <Route exact path="/admin" component={AdminPage}/>
-          <Route path="/admin/product/:id" component={AdminProductPage}/>
+          <PrivateRoute path="/order" component={Order} isAuthenticated={this.props.isAuthenticated}/>
+          <PrivateAdminRoute exact path="/admin" component={AdminPage} role={this.props.role}/>
+          <PrivateAdminRoute path="/admin/product/:id" component={AdminProductPage} role={this.props.role}/>
           <Redirect to="/" />
       </Switch>
     )
@@ -53,7 +64,8 @@ class App_routes extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated : state.auth.isAuthenticated,
+    role            : state.auth.role
   }
 }
 
