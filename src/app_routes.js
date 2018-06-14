@@ -26,10 +26,10 @@ const PrivateRoute = ({ component: Component, isAuthenticated,...rest }) => (
   )} />
 )
 
-const PrivateAdminRoute = ({ component: Component, role,...rest }) => (
+const PrivateAdminRoute = ({ component: Component, isAdmin,...rest }) => (
   <Route {...rest}
     render={(props) => (
-    role === 'admin'
+    isAdmin === true
       ? <Component {...props} />
       : <Redirect to={{
           pathname : '/',
@@ -54,8 +54,8 @@ class App_routes extends React.Component {
           <Route path="/login" component={LoginPage}/>
           <Route path="/register" component={RegisterPage}/>
           <PrivateRoute path="/order" component={Order} isAuthenticated={this.props.isAuthenticated}/>
-          <PrivateAdminRoute exact path="/admin" component={AdminPage} role={this.props.role}/>
-          <PrivateAdminRoute path="/admin/product/:id" component={AdminProductPage} role={this.props.role}/>
+          <PrivateAdminRoute exact path="/admin" component={AdminPage} isAdmin={this.props.isAdmin}/>
+          <PrivateAdminRoute path="/admin/product/:id" component={AdminProductPage} isAdmin={this.props.isAdmin}/>
           <Redirect to="/" />
       </Switch>
     )
@@ -65,7 +65,7 @@ class App_routes extends React.Component {
 const mapStateToProps = state => {
   return {
     isAuthenticated : state.auth.isAuthenticated,
-    role            : state.auth.role
+    isAdmin         : state.auth.isAdmin
   }
 }
 

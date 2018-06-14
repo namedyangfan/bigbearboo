@@ -7,7 +7,8 @@ const initialState = {
   isAuthenticated : false,
   error           : null,
   loading         : false,
-  role            : null
+  role            : null,
+  isAdmin         : null
 }
 
 const authStart = (state, action) => {
@@ -23,6 +24,7 @@ const authSuccess = (state, action) => {
     user_id         : action.user_id,
     user_name       : action.user_name,
     role            : action.role,
+    isAdmin         : action.role === 'admin',
     error           : null,
     loading         : false,
     isAuthenticated : true

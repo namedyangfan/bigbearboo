@@ -76,12 +76,20 @@ class Header extends Component {
         {
           this.state.dropDownIsSelected
             ? (
-              <div className="Dropdown-menu">
-                <NavLink className="Dropdown-option" to="/admin"
-                  activeClassName="is-selected">Admin</NavLink>
-                <div className="divider"></div>
-                <a className="Dropdown-option" onClick={this.logOutUser}>Logout</a>
-              </div>
+              this.props.isAdmin
+                ?(
+                  <div className="Dropdown-menu">
+                    <NavLink className="Dropdown-option" to="/admin"
+                      activeClassName="is-selected">Admin</NavLink>
+                    <div className="divider"></div>
+                    <a className="Dropdown-option" onClick={this.logOutUser}>Logout</a>
+                  </div>
+                )
+                :(
+                  <div className="Dropdown-menu">
+                    <a className="Dropdown-option" onClick={this.logOutUser}>Logout</a>
+                  </div>
+                )
               )
             : (null)
           }
@@ -158,7 +166,7 @@ const mapStateToProps = (state) => {
   return {
       user_name       : state.auth.user_name,
       user_id         : state.auth.user_id,
-      role            : state.auth.role,
+      isAdmin         : state.auth.isAdmin,
       isAuthenticated : state.auth.isAuthenticated,
       numberItems     : state.itemNumber.numberItems
   }
