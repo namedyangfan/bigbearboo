@@ -49,7 +49,7 @@ export default class ShopItem extends React.Component {
 
   render() {
     return (
-      <div className="shop-item grey lighten-4">
+      <div className="shop-item">
         <div className="container">
           <div className="row">
             {this.renderItemCards()}

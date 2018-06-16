@@ -9,7 +9,7 @@ class ProductPicture extends React.Component {
   render(){
     console.log('ProductPicture: ' + this.props.pictureDisplay)
     return(
-      <div className="col s12 m7 l8 ">
+      <div className="col s12 m6 l7 ">
         <div className="section">
           <div className="card-image">
             <img className="fit-card" src={this.props.pictureDisplay} />

@@ -111,7 +111,7 @@ class Header extends Component {
             {this.renderDropDown()}
           </li>
           <li>
-            <a className="waves-effect waves-light btn"  onClick={this.openCurrentOrder}>
+            <a className="waves-effect waves-light btn red lighten-3"  onClick={this.openCurrentOrder}>
               <i className="material-icons left">
                 shopping_cart
               </i> {this.props.numberItems}
@@ -131,7 +131,7 @@ class Header extends Component {
 
   renderCategoryTabs(){
     return(
-      <div className="nav-content pink lighten-1">
+      <div className="nav-content red lighten-3">
         <div className="tabs tabs-transparent row">
           <div className="tab col offset-m1 offset-l4">
             <NavLink to="/category/1">BRIDES</NavLink>
