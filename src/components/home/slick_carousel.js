@@ -6,9 +6,11 @@ const SampleNextArrow = (props) => {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "none", fontSize: "30px"}}
+      style={{ ...style, display: "block"}}
       onClick={onClick}
-    />
+    >
+    <i class="material-icons">arrow_forward_ios</i>
+    </div>
   );
 }
 
@@ -17,9 +19,10 @@ const SamplePrevArrow = (props) => {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "none", fontSize: "30px", fontColor: "black"}}
+      style={{ ...style, display: "block"}}
       onClick={onClick}
     >
+      <i class="material-icons">arrow_back_ios</i>
     </div>
   );
 }
@@ -61,17 +64,13 @@ export default class SlickCarousel extends React.Component {
       prevArrow: <SamplePrevArrow />
     };
     return (
-      <div className='slick-carousel'>
-        <div className='section'>
-          <div className='row'>
-            <div class="col s12 m10 offset-m1 l10 offset-l1 z-depth-6">
-              <Slider {...settings}>
-                {this.renderFirstSlide()}
-                {this.renderSecondSlide()}
-                {this.renderThirdSlide()}
-              </Slider>
-            </div>
-          </div>
+      <div className='section container'>
+        <div className='slick-carousel'>
+          <Slider {...settings}>
+            {this.renderFirstSlide()}
+            {this.renderSecondSlide()}
+            {this.renderThirdSlide()}
+          </Slider>
         </div>
       </div>
     );

@@ -76,14 +76,16 @@ export default class ProductPage extends React.Component {
 
   render(){
     return(
-      <div className="container product-page">
-        <div className="row">
-          <ProductPicture pictureDisplay={this.state.pictureDisplay}/>
-          <ProductOverview product={this.state.product} handleSelectVariance={this.handleSelectVariance}
-            selectedVarianceId={this.state.selectedVarianceId}/>
-        </div>
-        <div className="row">
-          {this.renderProductDetail()}
+      <div className="product-page">
+        <div className="container ">
+          <div className="row">
+            <ProductPicture pictureDisplay={this.state.pictureDisplay}/>
+            <ProductOverview product={this.state.product} handleSelectVariance={this.handleSelectVariance}
+              selectedVarianceId={this.state.selectedVarianceId}/>
+          </div>
+          <div className="row">
+            {this.renderProductDetail()}
+          </div>
         </div>
       </div>
     )

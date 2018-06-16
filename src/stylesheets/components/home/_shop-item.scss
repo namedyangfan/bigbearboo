@@ -41,3 +41,36 @@
 }
 
 
+.shop-item-carousel{
+
+  .slick-next {
+    z-index: 1;
+  }
+
+  .slick-next:before {
+    color: black;
+    font-size: 25px;
+    display: none;
+
+  }
+
+  .slick-prev {
+    z-index: 1;
+  }
+
+  .slick-prev:before {
+    color: black;
+    font-size: 25px;
+    display: none;
+  }
+
+  i.material-icons {
+    color: black;
+    font-size: 48px;
+    -webkit-transform:scale(2,4); /* Safari and Chrome */
+    -moz-transform:scale(2,4); /* Firefox */
+    -ms-transform:scale(2,4); /* IE 9 */
+    -o-transform:scale(2,4); /* Opera */
+    transform:scale(2,4); /* W3C */
+  }
+}

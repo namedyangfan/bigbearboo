@@ -16,24 +16,32 @@
       width: 90%;
     }
   }
+
+  i.material-icons {
+    color: black;
+    font-size: 48px;
+  }
+
+  .slick-next {
+    z-index: 1;
+  }
+
+  .slick-next:before {
+    color: black;
+    font-size: 25px;
+    display: none;
+
+  }
+
+  .slick-prev {
+    z-index: 1;
+  }
+
+  .slick-prev:before {
+    color: black;
+    font-size: 25px;
+    display: none;
+  }
 }
 
-.slick-next {
-  right: 20px;
-  z-index: 1;
-}
 
-.slick-next:before {
-  color: black;
-  font-size: 25px;
-}
-
-.slick-prev {
-  left: 5px; 
-  z-index: 1;
-}
-
-.slick-prev:before {
-  color: black;
-  font-size: 25px;
-}
