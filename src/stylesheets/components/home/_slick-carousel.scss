@@ -1,0 +1,39 @@
+.slick-carousel{
+
+  @media only screen and (min-width: 0px) {
+    .container {
+      width: 45%;
+    }
+  }
+
+  @media only screen and (min-width: 601px) {
+    .container {
+      width: 95%;
+    }
+  }
+  @media only screen and (min-width: 993px) {
+    .container {
+      width: 90%;
+    }
+  }
+}
+
+.slick-next {
+  right: 20px;
+  z-index: 1;
+}
+
+.slick-next:before {
+  color: black;
+  font-size: 25px;
+}
+
+.slick-prev {
+  left: 5px; 
+  z-index: 1;
+}
+
+.slick-prev:before {
+  color: black;
+  font-size: 25px;
+}
