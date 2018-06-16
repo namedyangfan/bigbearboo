@@ -5,11 +5,14 @@ import {BrowserRouter} from 'react-router-dom'
 import {Provider} from "react-redux";
 import registerServiceWorker from './registerServiceWorker';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import './stylesheets/main.scss';
 import store from "./store";
 import $ from 'jquery';
 import * as _ from 'lodash';
 import 'react-dropdown/style.css'
+
 
 window.jQuery = window.$ = $;
 window._ = window.$ = $;

@@ -1,6 +1,7 @@
 import React from 'react'
-import ShopItem from '.././components/home/shop_item'
-import HomePageLayout from '.././layouts/home_page_layout'
+import HomePageLayout from 'layouts/home_page_layout'
+import ShopItem from 'components/home/shop_item'
+import SlickCarousel from 'components/home/slick_carousel'
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -19,7 +20,10 @@ export default class Home extends React.Component {
 
   render() {
     return (
+      <div className='grey lighten-4'>
+        <SlickCarousel />
         <ShopItem handleClick={this.handleAddShopItem} history={this.props.history}/>
+      </div>
       );
   }
 }

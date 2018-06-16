@@ -114,7 +114,7 @@ class ProductOverview extends React.Component {
 
   render(){
     return(
-      <div className="col s12 m5 l4">
+      <div className="col s12 m6 l5">
           {this.renderName()}
           {this.renderPrice()}
           {this.renderVariance()}

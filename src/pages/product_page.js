@@ -9,7 +9,7 @@ class ProductPicture extends React.Component {
   render(){
     console.log('ProductPicture: ' + this.props.pictureDisplay)
     return(
-      <div className="col s12 m7 l8 ">
+      <div className="col s12 m6 l7 ">
         <div className="section">
           <div className="card-image">
             <img className="fit-card" src={this.props.pictureDisplay} />
@@ -76,14 +76,16 @@ export default class ProductPage extends React.Component {
 
   render(){
     return(
-      <div className="container product-page">
-        <div className="row">
-          <ProductPicture pictureDisplay={this.state.pictureDisplay}/>
-          <ProductOverview product={this.state.product} handleSelectVariance={this.handleSelectVariance}
-            selectedVarianceId={this.state.selectedVarianceId}/>
-        </div>
-        <div className="row">
-          {this.renderProductDetail()}
+      <div className="product-page">
+        <div className="container ">
+          <div className="row">
+            <ProductPicture pictureDisplay={this.state.pictureDisplay}/>
+            <ProductOverview product={this.state.product} handleSelectVariance={this.handleSelectVariance}
+              selectedVarianceId={this.state.selectedVarianceId}/>
+          </div>
+          <div className="row">
+            {this.renderProductDetail()}
+          </div>
         </div>
       </div>
     )
