@@ -8,5 +8,9 @@ export const show = (params) => { return axios.get(`${API}/${params.product_id}`
 
 export const patch = (params) => { return axios.patch(`${API}/${params.product_id}`, params)}
 
+export const patch = (params) => { return axios.patch(`${API}/publish/${params.product_id}`)}
+
+export const patch = (params) => { return axios.patch(`${API}/draft/${params.product_id}`)}
+
 export const post = (params) => { return axios.post(`${API}`, params)}
 
