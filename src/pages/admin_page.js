@@ -5,10 +5,45 @@ import * as AdminProductsApi from 'api/admin_products'
 import CreateProductModal from 'components/admin/products/create_product_modal'
 
 export class Row extends React.Component {
+  constructor(props) {
+    super();
+    this.state = {
+      status: props.row.status,
+      isPublished: props.row.status == 'Published'
+    }
+  }
 
   handleClick = () => {
     console.log( this.props.match.params)
     this.props.history.push(`/admin/product/${this.props.row.product_id}`)
+  }
+
+  handleChangeStatus = () => {
+    console.log(this.props.row.status)
+    const param = {
+      product_id : this.props.row.product_id,
+      user_id    : localStorage.getItem('user_id'),
+      token      : localStorage.getItem('token')
+    }
+
+    if(this.state.isPublished){
+      AdminProductsApi.draft(param)
+      .then( response => {
+        this.setState({
+          isPublished: false,
+          status: response.data.status
+        })
+      })
+    }
+    else{
+      AdminProductsApi.publish(param)
+      .then( response => {
+        this.setState({
+          isPublished: true,
+          status: response.data.status
+        })
+      })
+    }
   }
 
   renderCells(row){
@@ -17,20 +52,39 @@ export class Row extends React.Component {
 
   renderCell = (value, key) => {
     if (key == 'picture'){
-      return <td><img className="materialboxed" width="50" src={value} /></td>
+      return <td><img className="materialboxed" width="50" src={value}  onClick={this.handleClick}/></td>
+    }
+    else if (key == 'status'){
+      return <td  onClick={this.handleClick}>{this.state.status}</td>
     }
     else{
-      return <td>{value}</td>
+      return <td  onClick={this.handleClick}>{value}</td>
     }
+  }
+
+  renderStatus = () => {
+    return(
+      <div>
+        {this.state.isPublished ? (
+          <td>
+            <a className="waves-effect waves-light btn-small red" onClick={this.handleChangeStatus}>UNPUBLISH</a>
+          </td>
+        ) : (
+          <td>
+            <a className="waves-effect waves-light btn-small" onClick={this.handleChangeStatus}>PUBLISH</a>
+          </td>
+        )}
+      </div>
+    )
   }
 
   render(){
     return(
-      <tr className="" onClick={this.handleClick}>
-        {this.renderCells(this.props.row)}
-      </tr>
+        <tr className="">
+          {this.renderCells(this.props.row)}
+          {this.renderStatus()}
+        </tr>
     )
-
   }
 }
 
