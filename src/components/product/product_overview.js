@@ -5,6 +5,7 @@ import Dropdown from 'react-dropdown'
 import classNames from'classnames'
 import {connect} from 'react-redux';
 import {addItem} from 'actions/cart'
+import MeasurementModal from 'share/modal/measurement_modal'
 
 class VarianceTag extends React.Component {
   handleClick = () => {
@@ -93,8 +94,10 @@ class ProductOverview extends React.Component {
         <div className="row">
           <div className="col s12 m11 l11">
             <div className='row'>
-              <div className="col"> Sizes </div>
-              <a className='col measurement-link'>view measurement</a>
+              <div className='col'> Sizes </div>
+              <div className='col'>
+                <MeasurementModal />
+              </div>
             </div>
             <Dropdown options={sizes} onChange={this.handleSelectSize} value={this.state.size}
               placeholder="Select a size"/>
