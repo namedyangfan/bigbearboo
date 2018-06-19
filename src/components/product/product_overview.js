@@ -45,6 +45,10 @@ class ProductOverview extends React.Component {
 
   handleSelectQuantity = (quantity) =>{
     this.setState({quantity: quantity.value})
+  }  
+
+  handleSelectSize = (e) =>{
+    this.setState({size: e}, () => console.log(this.state.size))
   }
 
   renderName = () => {
@@ -76,15 +80,33 @@ class ProductOverview extends React.Component {
     )
   }
 
+  renderSizes = () => {
+    const sizes = this.props.product && this.props.product.sizes
+    return(
+      sizes
+      ?(
+        <div className="row">
+          <div className="col s12 m8 l8">
+          Sizes
+            <Dropdown options={sizes} onChange={this.handleSelectSize} value={this.state.size}
+              placeholder="Select a size"/>
+          </div>
+        </div>
+      ):(
+        <div/>
+      )
+    )
+  }
+
   renderQuantity = () => {
     const options = [ '1', '2', '3', '4','5']
 
     return(
       <div className="row">
-        <div className="col s5 m5 l3">
+        <div className="col s5 m5 l5">
           Quantity
           <Dropdown options={options} onChange={this.handleSelectQuantity} value={this.state.quantity} 
-            placeholder="Select an option"/>
+            placeholder="Select an size"/>
         </div>
       </div>
     )
@@ -118,6 +140,7 @@ class ProductOverview extends React.Component {
           {this.renderName()}
           {this.renderPrice()}
           {this.renderVariance()}
+          {this.renderSizes()}
           {this.renderQuantity()}
           {this.renderAddtoCartButton()}
           {this.renderDescription()}
