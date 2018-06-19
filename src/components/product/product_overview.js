@@ -73,27 +73,33 @@ class ProductOverview extends React.Component {
 
   renderVariance = () => {
     return(
-      _.map(this.props.product && this.props.product.attributes, (value) => 
-        <VarianceTag attribute={value} handleSelectVariance={this.props.handleSelectVariance}
-        selectedVarianceId={this.props.selectedVarianceId}/>
-      )
+      <div className="row">
+        {_.map(this.props.product && this.props.product.attributes, (value) => 
+          <VarianceTag attribute={value} handleSelectVariance={this.props.handleSelectVariance}
+          selectedVarianceId={this.props.selectedVarianceId}/>
+        )}
+      </div>
     )
   }
 
   renderSizes = () => {
     const sizes = this.props.product && this.props.product.sizes
+    console.log('SIZE: ' + _.isEmpty(sizes))
     return(
-      sizes
+      _.isEmpty(sizes)
       ?(
+        <div/>
+      ):(
         <div className="row">
-          <div className="col s12 m8 l8">
-          Sizes
+          <div className="col s12 m11 l11">
+            <div className='row'>
+              <div className="col"> Sizes </div>
+              <a className='col measurement-link'>view measurement</a>
+            </div>
             <Dropdown options={sizes} onChange={this.handleSelectSize} value={this.state.size}
               placeholder="Select a size"/>
           </div>
         </div>
-      ):(
-        <div/>
       )
     )
   }
@@ -104,7 +110,7 @@ class ProductOverview extends React.Component {
     return(
       <div className="row">
         <div className="col s5 m5 l5">
-          Quantity
+          <span>Quantity</span>
           <Dropdown options={options} onChange={this.handleSelectQuantity} value={this.state.quantity} 
             placeholder="Select an size"/>
         </div>

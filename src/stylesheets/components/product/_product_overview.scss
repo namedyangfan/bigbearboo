@@ -4,7 +4,17 @@ hr.greystyle{
 
 .Dropdown-control{
   border-radius: 9px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+}
 
+.Dropdown-control:hover {
+  background-color:pink;
+  cursor:pointer;
+}
+
+.Dropdown-root:after{
+  cursor: pointer;
 }
 
 .Dropdown-menu{
@@ -21,4 +31,10 @@ hr.greystyle{
   height: 30px;
   width: 30px;
   text-align: center;
+}
+
+.measurement-link{
+  text-decoration: underline;
+  font-style: italic;
+  cursor:pointer;
 }
