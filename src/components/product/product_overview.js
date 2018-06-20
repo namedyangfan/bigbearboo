@@ -38,9 +38,9 @@ class ProductOverview extends React.Component {
     const itemParams = {
       product_id: this.props.product.product_id,
       quantity: this.state.quantity,
-      product_attribute_id: this.props.selectedVarianceId
+      product_attribute_id: this.props.selectedVarianceId,
+      size_id: this.state.size && this.state.size.value
     }
-
     this.props.addItem(itemParams)
   }
 
