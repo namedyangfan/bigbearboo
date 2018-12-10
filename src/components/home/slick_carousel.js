@@ -9,6 +9,7 @@ const SampleNextArrow = (props) => {
       style={{ ...style, display: "block"}}
       onClick={onClick}
     >
+      <i class="material-icons">arrow_forward_ios</i>
     </div>
   );
 }
