@@ -23,6 +23,16 @@ class Row extends React.Component {
     this.props.setNeedRefresh()
   }
   
+  renderSize = () => {
+    return(
+      this.props.row.size?(
+        <div> Size: {this.props.row.size} </div>
+      ):(
+        <div/>
+      )
+    )
+  }
+
   renderPicture = () => {
     const pictureURL = this.props.row.product_attributes.picture ||this.props.row.product_picture
 
@@ -36,6 +46,7 @@ class Row extends React.Component {
             <div className='item-name'> {this.props.row.product_attributes.name} </div>
             <div className='section item-details'>
               Item Price: ${this.props.row.unit_price}
+              {this.renderSize()}
             </div>
             <div className='remove-action' onClick={this.handleRemoveItem}>
               <span className='item-details'>REMOVE</span>

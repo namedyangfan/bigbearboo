@@ -1,3 +1,38 @@
 hr.greystyle{
   border: #E1E3DF 1px solid;
 }
+
+.Dropdown-control{
+  border-radius: 9px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+}
+
+.Dropdown-control:hover {
+  background-color:pink;
+  cursor:pointer;
+}
+
+.Dropdown-root:after{
+  cursor: pointer;
+}
+
+.Dropdown-menu{
+  border-radius: 9px;
+}
+
+.size-box{
+  border-width: 2px;
+  border: 1px solid #666;
+  background-color: #e7d2a0;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-size: 12px;
+  height: 30px;
+  width: 30px;
+  text-align: center;
+}
+
+.ReactModal__Overlay{
+  z-index: 1
+}

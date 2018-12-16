@@ -5,6 +5,7 @@ import Dropdown from 'react-dropdown'
 import classNames from'classnames'
 import {connect} from 'react-redux';
 import {addItem} from 'actions/cart'
+import MeasurementModal from 'share/modal/measurement_modal'
 
 class VarianceTag extends React.Component {
   handleClick = () => {
@@ -37,14 +38,18 @@ class ProductOverview extends React.Component {
     const itemParams = {
       product_id: this.props.product.product_id,
       quantity: this.state.quantity,
-      product_attribute_id: this.props.selectedVarianceId
+      product_attribute_id: this.props.selectedVarianceId,
+      size_id: this.state.size && this.state.size.value
     }
-
     this.props.addItem(itemParams)
   }
 
   handleSelectQuantity = (quantity) =>{
     this.setState({quantity: quantity.value})
+  }  
+
+  handleSelectSize = (e) =>{
+    this.setState({size: e}, () => console.log(this.state.size))
   }
 
   renderName = () => {
@@ -69,9 +74,35 @@ class ProductOverview extends React.Component {
 
   renderVariance = () => {
     return(
-      _.map(this.props.product && this.props.product.attributes, (value) => 
-        <VarianceTag attribute={value} handleSelectVariance={this.props.handleSelectVariance}
-        selectedVarianceId={this.props.selectedVarianceId}/>
+      <div className="row">
+        {_.map(this.props.product && this.props.product.attributes, (value) => 
+          <VarianceTag attribute={value} handleSelectVariance={this.props.handleSelectVariance}
+          selectedVarianceId={this.props.selectedVarianceId}/>
+        )}
+      </div>
+    )
+  }
+
+  renderSizes = () => {
+    const sizes = this.props.product && this.props.product.sizes
+    console.log('SIZE: ' + _.isEmpty(sizes))
+    return(
+      _.isEmpty(sizes)
+      ?(
+        <div/>
+      ):(
+        <div className="row">
+          <div className="col s12 m11 l11">
+            <div className='row'>
+              <div className='col'> Sizes </div>
+              <div className='col'>
+                <MeasurementModal />
+              </div>
+            </div>
+            <Dropdown options={sizes} onChange={this.handleSelectSize} value={this.state.size}
+              placeholder="Select a size"/>
+          </div>
+        </div>
       )
     )
   }
@@ -81,10 +112,10 @@ class ProductOverview extends React.Component {
 
     return(
       <div className="row">
-        <div className="col s5 m5 l3">
-          Quantity
+        <div className="col s5 m5 l5">
+          <span>Quantity</span>
           <Dropdown options={options} onChange={this.handleSelectQuantity} value={this.state.quantity} 
-            placeholder="Select an option"/>
+            placeholder="Select an size"/>
         </div>
       </div>
     )
@@ -118,6 +149,7 @@ class ProductOverview extends React.Component {
           {this.renderName()}
           {this.renderPrice()}
           {this.renderVariance()}
+          {this.renderSizes()}
           {this.renderQuantity()}
           {this.renderAddtoCartButton()}
           {this.renderDescription()}

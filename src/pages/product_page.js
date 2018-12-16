@@ -44,7 +44,6 @@ export default class ProductPage extends React.Component {
           selectedVarianceId: _.head(response.data.attributes).product_attribute_id
         })
       }
-
     })
     .catch((error) => {
       console.log('ERROR:' + error.response)
@@ -66,7 +65,7 @@ export default class ProductPage extends React.Component {
     var reactElement = htmlToReactParser.parse(htmlInput);
      
     return(
-      <div className="col s12 m7 l8 detail-card">
+      <div className="col s12 m6 l7 detail-card">
         <div className="section">
           {reactElement}
         </div>
