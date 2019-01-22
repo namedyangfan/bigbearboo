@@ -41,7 +41,12 @@ class ProductOverview extends React.Component {
       product_attribute_id: this.props.selectedVarianceId,
       size_id: this.state.size && this.state.size.value
     }
-    this.props.addItem(itemParams)
+
+    this.props.isAuthenticated?(
+      this.props.addItem(itemParams)
+    ):(
+      this.props.history.push(`/login`)
+    )
   }
 
   handleSelectQuantity = (quantity) =>{
@@ -53,6 +58,7 @@ class ProductOverview extends React.Component {
   }
 
   renderName = () => {
+
     return(
       <div>
         <h5>
@@ -85,7 +91,7 @@ class ProductOverview extends React.Component {
 
   renderSizes = () => {
     const sizes = this.props.product && this.props.product.sizes
-    console.log('SIZE: ' + _.isEmpty(sizes))
+
     return(
       _.isEmpty(sizes)
       ?(
@@ -160,6 +166,7 @@ class ProductOverview extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+      isAuthenticated : state.auth.isAuthenticated,
       numberItems: state.numberItems,
   };
 };
