@@ -117,8 +117,15 @@ class Header extends Component {
     }
     return(
       <ul id="nav-mobile" className="right">
-        <li><NavLink exact to="/">Home</NavLink></li>
-        <li><NavLink to="/login">Login</NavLink></li>
+        <li>            
+          <NavLink exact to="/">
+              <i className="material-icons left">home</i>Home
+            </NavLink>
+          </li>
+        <li><NavLink to="/login">
+          <i class="material-icons left">account_circle</i>Login
+          </NavLink>
+        </li>
       </ul>
     )
   }
@@ -145,7 +152,7 @@ class Header extends Component {
     return(
       <nav className="nav-extended">
         <div className="header nav-wrapper">
-          <div className="container">
+          <div>
             <ul id="nav-mobile" className="left hide-on-med-and-down">
               <li>
                 <a href="https://github.com/namedyangfan/bigbearboo">
