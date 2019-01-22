@@ -15,8 +15,7 @@ class ItemCard extends React.Component {
     return(
         <div className="col s12 m6 l4 item-card">
           <div className="card large" onClick={this.handleOnClick}>
-            <div className="product-card card-image" style={{backgroundImage: `url(${this.props.product.picture})`, backgroundSize: 'cover', backgroundPosition:'center'}}>
-              <span className='card-title'>{this.props.product.price}</span>
+            <div className="product-card" style={{backgroundImage: `url(${this.props.product.picture})`, backgroundSize: 'cover', backgroundPosition:'center'}}>
             </div>
           </div>
         </div>
