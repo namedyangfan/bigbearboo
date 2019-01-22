@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://namedyangfan.github.io/bigbearboo",
   "dependencies": {
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",
@@ -29,6 +30,7 @@
     "jquery": "^3.3.1",
     "lodash": "^4.17.5",
     "materialize-css": "^1.0.0-rc.1",
+    "node-sass": "^4.11.0",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
@@ -50,7 +52,9 @@
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "sass-loader": "^3.2.3",
     "slick-carousel": "^1.8.1",
+    "style-loader": "^0.19.1",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
     "webpack-dev-server": "2.9.4",
@@ -60,7 +64,9 @@
   "scripts": {
     "start": "PORT=3006 node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -117,9 +123,7 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.7.0",
-    "node-sass": "^4.8.3",
-    "sass-loader": "^3.2.3",
-    "style-loader": "^0.19.1",
+    "gh-pages": "^2.0.1",
     "webpack": "^3.11.0"
   }
 }
