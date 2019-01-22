@@ -41,7 +41,7 @@ export default class CreateProductModal extends React.Component {
     console.log('state:' + this.state.category.value)
   }
 
-  renderCategory = (e) => {
+  renderCategory = () => {
     const options = [
       { value: 1, label: 'BRIDES' },
       { value: 2, label: 'BRIDESMAIDS' },

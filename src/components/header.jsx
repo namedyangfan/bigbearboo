@@ -27,7 +27,6 @@ class Header extends Component {
       }
     })
     .then((response) => {
-      console.log(response)
       this.props.history.push(`/home`)
     })
     .catch((error) => {
@@ -57,12 +56,7 @@ class Header extends Component {
     this.handleDropdownClick(e)
   }
 
-  handleClickCatagory = (e) => {
-    console.log(e)
-  }
-
   openCurrentOrder = (e) => {
-    console.log('CURRENT ORDER')
     this.props.history.push(`/order`)
   }
 
