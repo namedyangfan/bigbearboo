@@ -146,7 +146,18 @@ class Header extends Component {
       <nav className="nav-extended">
         <div className="header nav-wrapper">
           <div className="container">
-            <NavLink className="brand-logo left" to="/home">Logo</NavLink>
+            <ul id="nav-mobile" className="left hide-on-med-and-down">
+              <li>
+                <a href="https://github.com/namedyangfan/bigbearboo">
+                  <i className="fab fa-github"></i> 
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/fanyangcanada/">
+                  <i className="fab fa-linkedin"></i> 
+                </a>
+                </li>
+            </ul>
           </div>
           {this.renderNavigationItems()}
         </div>

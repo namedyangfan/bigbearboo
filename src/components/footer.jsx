@@ -7,19 +7,25 @@ export default class Footer extends Component {
       <footer className="page-footer">
         <div className="container">
           <div className="row">
-            <div className="col l6 s12">
-              <h5 className="white-text">Footer Content</h5>
-              <p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+            <div className="col l3 m4 s12">
+                  <a href="https://github.com/namedyangfan/bigbearboo" className="btn footer-button">
+                    <i className="fab fa-github fa-5x footer-icon left"></i> 
+                    see code
+                  </a>
             </div>
-            <div className="col l4 offset-l2 s12">
-              <h5 className="white-text">Links</h5>
-              <ul>
-                <li><NavLink to="/about" activeClassName="active">About</NavLink></li>
-                <li><NavLink to="/contact" activeClassName="active">Contact</NavLink></li>
-              </ul>
+            <div className="col l3 m4 s12">
+                  <a href="https://www.linkedin.com/in/fanyangcanada/" className="btn footer-button">
+                    <i className="fab fa-linkedin fa-5x footer-icon left"></i>
+                    Fan Yang
+                  </a>
             </div>
           </div>
         </div>
+        <div class="footer-copyright">
+            <div class="container">
+            © 2019 Copyright
+            </div>
+          </div>
       </footer>
       );
   }
