@@ -3,6 +3,7 @@ import { NavLink, Link } from 'react-router-dom'
 import _ from 'lodash'
 import * as HomeProductsApi from 'api/home_products'
 import HomePageLayout from 'layouts/home_page_layout'
+import LoadingState from 'share/loading_state'
 
 class ItemCard extends React.Component {
   handleOnClick = () => {
@@ -27,6 +28,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading : true
     };
   }
 
@@ -45,7 +47,10 @@ export default class Home extends React.Component {
 
     HomeProductsApi.indexCategory(params)
     .then((response) => {
-      this.setState({products: response.data})
+      this.setState({
+        products  : response.data,
+        isLoading : false 
+      })
     })
     .catch((error) => {
       console.log(error.response.data.errors)
@@ -65,7 +70,15 @@ export default class Home extends React.Component {
       <div className="shop-item grey lighten-4">
         <div className="container">
           <div className="row">
-            {this.renderItemCards()}
+            {
+              this.state.isLoading?(
+                <div className='section'>
+                  <LoadingState />
+                </div>
+              ):(
+                this.renderItemCards()
+              )
+            }
           </div>
         </div>
       </div>

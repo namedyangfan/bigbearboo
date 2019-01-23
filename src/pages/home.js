@@ -9,7 +9,9 @@ export default class Home extends React.Component {
     return (
       <div className='grey lighten-4'>
         <SlickCarousel />
-        <ShopItem history={this.props.history}/>
+        <div className='section'>
+          <ShopItem history={this.props.history}/>
+        </div>
       </div>
       );
   }

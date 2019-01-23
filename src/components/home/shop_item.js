@@ -3,6 +3,7 @@ import { NavLink, Link } from 'react-router-dom'
 import  Slider from "react-slick";
 import _ from 'lodash'
 import * as HomeProductsApi from 'api/home_products'
+import LoadingState from 'share/loading_state'
 
 const SampleNextArrow = (props) => {
   const { className, style, onClick } = props;
@@ -12,7 +13,7 @@ const SampleNextArrow = (props) => {
       style={{ ...style, display: "block", background: "none"}}
       onClick={onClick}
     >
-      <i className="material-icons">arrow_right</i>
+      <i className="material-icons left">arrow_right</i>
     </div>
   );
 }
@@ -25,7 +26,7 @@ const SamplePrevArrow = (props) => {
       style={{ ...style, display: "block", background: "none"}}
       onClick={onClick}
     >
-      <i className="material-icons">arrow_left</i>
+      <i className="material-icons right">arrow_left</i>
     </div>
   );
 }
@@ -51,6 +52,7 @@ export default class ShopItem extends React.Component {
     super(props);
     this.state = {
       products    : null,
+      isLoading   : true,
     };
   }
 
@@ -59,7 +61,10 @@ export default class ShopItem extends React.Component {
 
     HomeProductsApi.index(params)
     .then((response) => {
-      this.setState({products: response.data})
+      this.setState({
+        products : response.data,
+        isLoading: false
+      })
     })
     .catch((error) => {
       console.log(error.response.data.errors)
@@ -101,7 +106,13 @@ export default class ShopItem extends React.Component {
     return (
       <div className="shop-item">
         <div className="container">
-          {this.renderCarousel()}
+          {
+            this.state.isLoading?(
+              <LoadingState />
+            ):(
+              this.renderCarousel()
+            )
+          }
         </div>
       </div>
       );

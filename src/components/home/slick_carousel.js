@@ -9,7 +9,7 @@ const SampleNextArrow = (props) => {
       style={{ ...style, display: "block"}}
       onClick={onClick}
     >
-      <i class="material-icons">arrow_forward_ios</i>
+      <i class="material-icons left">arrow_forward_ios</i>
     </div>
   );
 }
@@ -22,7 +22,7 @@ const SamplePrevArrow = (props) => {
       style={{ ...style, display: "block"}}
       onClick={onClick}
     >
-      <i class="material-icons">arrow_back_ios</i>
+      <i class="material-icons right">arrow_back_ios</i>
     </div>
   );
 }
