@@ -38,7 +38,7 @@ class ItemCard extends React.Component {
 
   render(){
     return(
-          <div className="card medium" onClick={this.handleOnClick}>
+          <div className="card-image" onClick={this.handleOnClick}>
             <div className="product-card">
               <img src={this.props.product.picture}/>
             </div>
@@ -87,8 +87,32 @@ export default class ShopItem extends React.Component {
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 1,
-      nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />
+      initialSlide: 0,
+      responsive: [
+        {
+          breakpoint: 1250,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
     };
 
     return (
