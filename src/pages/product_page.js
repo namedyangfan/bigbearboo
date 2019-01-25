@@ -80,7 +80,7 @@ export default class ProductPage extends React.Component {
           <div className="row">
             <ProductPicture pictureDisplay={this.state.pictureDisplay}/>
             <ProductOverview product={this.state.product} handleSelectVariance={this.handleSelectVariance}
-              selectedVarianceId={this.state.selectedVarianceId}/>
+              selectedVarianceId={this.state.selectedVarianceId} history={this.props.history}/>
           </div>
           <div className="row">
             {this.renderProductDetail()}
